@@ -1,9 +1,35 @@
 import React from 'react'
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { Debug } from './Debug'
+import {
+  Button,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+  Transition,
+  List
+} from 'semantic-ui-react'
 
+import { Debug } from './Debug'
 import Thumb from './Thumb'
+
+const validationSchema = Yup.object({
+  instructions: Yup.array().of(
+    Yup.object({
+      instruction: Yup.string().required('Required'),
+      image: Yup.mixed().required('Required')
+    })
+  ),
+  image: Yup.mixed().required()
+})
+
+const handleSubmit = values => {
+  setTimeout(() => {
+    alert(JSON.stringify(values, null, 2))
+  }, 500)
+}
 
 const initialValues = {
   title: '',
@@ -29,30 +55,29 @@ const initialValues = {
 }
 
 const AddRecipe = () => (
-  <div>
-    <h1>Add your Comida Gostosa</h1>
+  <>
+    <Header as="h1" color="teal" textAlign="center">
+      Add your Comida Gostosa
+    </Header>
+
     <Formik
       initialValues={initialValues}
-      validationSchema={Yup.object({
-        instructions: Yup.array().of(
-          Yup.object({
-            instruction: Yup.string().required('Required'),
-            image: Yup.mixed().required('Required')
-          })
-        ),
-        image: Yup.mixed().required()
-      })}
-      onSubmit={values => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-        }, 500)
-      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     >
       {({ values, isSubmitting, handleSubmit, setFieldValue }) => (
         <Form>
-          <label>Title:</label>
-          <Field name="title" type="text" placeholder="Enter a title for this recipe"/>
-          <ErrorMessage name="title" />
+          {/* Title form field */}
+          <div className="ui labeled input">
+            <div className="ui label label">Title</div>
+            <Field
+              name="title"
+              type="text"
+              placeholder="Enter a title for this recipe"
+            />
+            <ErrorMessage name="title" />
+          </div>
+          {/* Upload a cover photo */}
           <div>
             <label>Please select a cover photo for this recipe:</label>
             <input
@@ -62,14 +87,23 @@ const AddRecipe = () => (
                 setFieldValue('image', event.currentTarget.files[0])
               }}
             />
-            <Thumb file={values.image} />
           </div>
-          <label>Season:</label>
-          <Field name="season" component="select" />
-          <ErrorMessage name="season" />
-          <label>Time:</label>
-          <Field name="timeOptions" component="select" />
-          <ErrorMessage name="timeOptions" />
+          {/* Season form field */}
+          <div className="ui labeled input">
+            <div className="ui label label">Season</div>
+            <Field name="season" component="select" />
+            <ErrorMessage name="season" />
+          </div>
+          {/* Time form field */}
+          <div className="ui labeled input">
+            <div className="ui label label">Time</div>
+            <Field name="timeOptions" component="select" />
+            <ErrorMessage name="timeOptions" />
+          </div>
+
+          {values.image && <Thumb file={values.image} />}
+
+          {/* Instructions form field */}
           <label>Instructions:</label>
           <FieldArray name="instructions">
             {({ push, remove }) => (
@@ -77,7 +111,7 @@ const AddRecipe = () => (
                 {values.instructions &&
                   values.instructions.length > 0 &&
                   values.instructions.map((instruction, index) => (
-                    <div key={index}>
+                    <List.Item key={index}>
                       <div>
                         <div className="row">
                           <div className="col">
@@ -107,7 +141,6 @@ const AddRecipe = () => (
                             />
                             <Thumb file={values.instructions[index].image} />
                           </div>
-
                           <ErrorMessage name={`instructions[${index}].image`}>
                             {msg => <div>{msg}</div>}
                           </ErrorMessage>
@@ -118,25 +151,29 @@ const AddRecipe = () => (
                           X
                         </button>
                       </div>
-                    </div>
+                    </List.Item>
                   ))}
-                <button
+
+                <Button
+                  color="teal"
+                  fluid
+                  size="large"
                   type="button"
                   onClick={() => push({ name: '', email: '' })}
                 >
                   Add Another Step
-                </button>
+                </Button>
               </React.Fragment>
             )}
           </FieldArray>
           <button type="submit" disabled={isSubmitting}>
             Add Recipe
           </button>
-          <Debug />
+          {/* <Debug /> */}
         </Form>
       )}
     </Formik>
-  </div>
+  </>
 )
 
 export default AddRecipe
