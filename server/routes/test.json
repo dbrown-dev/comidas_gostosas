@@ -1,0 +1,31 @@
+{
+  "title": "Cool",
+  "season": "Summer",
+  "image": "/bob/bob.jpg",
+  "timeOption": "Quick",
+  "cuisineCategories": ["blah", "blah"],
+  "instructions": [
+    {
+      "instruction": "Do this",
+      "image": "photo1.pjg"
+    },
+    {
+      "instruction": "Do that",
+      "image": "photo2"
+    }
+  ],
+  "ingredients": [
+    {
+      "ingredientId": 1,
+      "quantity": 1,
+      "ingredientGroup": "Sauce",
+      "measurementId": 1
+    },
+    {
+      "ingredientId": 2,
+      "quantity": 2,
+      "ingredientGroup": "Meat",
+      "measurementId": 2
+    }
+  ]
+}

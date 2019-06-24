@@ -1,13 +1,12 @@
 const express = require('express')
-const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 
-const apiRoutes = require('./routes/api')
+const recipesRoutes = require('./routes/recipes')
 
 const server = express()
 
-server.use(bodyParser.urlencoded({ extended: false }));
+server.use(express.json())
 server.use(pino);
-server.use('/api', apiRoutes)
+server.use('/api/recipes', recipesRoutes)
 
 module.exports = server

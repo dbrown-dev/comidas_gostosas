@@ -43,7 +43,7 @@ const initialValues = {
   season: '',
   image: '',
   timeOption: '',
-  cuisineCategorie: [],
+  cuisineCategories: [],
   instructions: [
     {
       instruction: '',
@@ -77,7 +77,7 @@ export default class ModifyRecipe extends React.Component {
           onSubmit={handleSubmit}
         >
           {({ values, isSubmitting, handleSubmit, setFieldValue }) => (
-            <Form className="ui form">
+            <Form className="ui form small">
               <Grid>
                 <Header as="h2">Recipe Info</Header>
                 <Grid.Row columns={2}>
