@@ -127,6 +127,44 @@ const updateRecipeById = (id, recipe, db = database) => {
       })
       .transacting(trx)
       .then(() => {
+        const cuisineCategories = recipe.cuisineCategories.map(category => {
+          return { recipe_id: id, category_id: category }
+        })
+        db('cuisine_categories_recipes')
+          .where('recipe_id', id)
+          .del()
+          .insert(cuisineCategories)
+          .transacting(trx)
+          .then(() => {
+            const ingredients = recipe.ingredients.map(category => {
+              return {
+                recipe_id: id,
+                ingredients_id: category.ingredientId,
+                quantity: category.quantity,
+                measure_id: category.measurementId,
+                ingredient_group: category.ingredientGroup
+              }
+            })
+            db('ingredients_recipes')
+              .where('recipe_id', id)
+              .del()
+              .insert(ingredients)
+              .transacting(trx)
+              .then(() => {
+                const instructions = recipe.instructions.map(instruction => {
+                  return {
+                    recipe_id: id,
+                    instruction: instruction.instruction,
+                    image: instruction.image
+                  }
+                })
+                return db('instructions')
+                  .where('recipe_id', id)
+                  .del()
+                  .insert(instructions)
+                  .transacting(trx)
+              })
+          })
 
       })
       .then(trx.commit)
