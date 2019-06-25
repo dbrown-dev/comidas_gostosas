@@ -17,7 +17,7 @@ import {
   SelectInput,
   FileInput,
   TextAreaInput
-} from './forms/FormHelper'
+} from './util/FormHelper'
 
 const validationSchema = Yup.object({
   title: Yup.string().required('Required'),

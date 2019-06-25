@@ -1,24 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { getRecipesSummary } from './util/api'
+
 export default class DisplayRecipes extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
-  getAllRecipes = () => {
-    return fetch('/api/recipes')
-      .then(response => {
-        return response.json()
-      })
-      .then(jsonResponse => {
-        this.setState({ recipes: jsonResponse })
-      })
+  getAllRecipes = (recipes) => {
+    this.setState({recipes})
   }
 
   componentDidMount() {
-    this.getAllRecipes()
+    getRecipesSummary(this.getAllRecipes)
   }
 
   render() {
