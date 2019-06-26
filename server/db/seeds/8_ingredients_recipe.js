@@ -8,7 +8,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 1,
           recipe_id: 1,
-          ingredients_id: 22,
+          ingredient_id: 22,
           quantity: 1,
           measure_id: 1,
           ingredient_group: 'Rice Bowl'
@@ -16,14 +16,14 @@ exports.seed = function (knex, Promise) {
         {
           id: 2,
           recipe_id: 1,
-          ingredients_id: 23,
+          ingredient_id: 23,
           quantity: 1,
           ingredient_group: 'Rice Bowl'
         },
         {
           id: 3,
           recipe_id: 1,
-          ingredients_id: 24,
+          ingredient_id: 24,
           quantity: 2,
           measure_id: 2,
           ingredient_group: 'Rice Bowl'
@@ -31,7 +31,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 4,
           recipe_id: 1,
-          ingredients_id: 25,
+          ingredient_id: 25,
           quantity: 300,
           measure_id: 3,
           ingredient_group: 'Miso Ginger Tofu'
@@ -39,7 +39,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 5,
           recipe_id: 1,
-          ingredients_id: 26,
+          ingredient_id: 26,
           quantity: 3,
           measure_id: 4,
           ingredient_group: 'Miso Ginger Tofu'
@@ -47,7 +47,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 6,
           recipe_id: 1,
-          ingredients_id: 27,
+          ingredient_id: 27,
           quantity: 100,
           measure_id: 3,
           ingredient_group: 'Miso Ginger Tofu'
@@ -55,7 +55,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 7,
           recipe_id: 1,
-          ingredients_id: 28,
+          ingredient_id: 28,
           quantity: 1,
           measure_id: 4,
           ingredient_group: 'Miso Ginger Tofu'
@@ -63,7 +63,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 8,
           recipe_id: 1,
-          ingredients_id: 27,
+          ingredient_id: 27,
           quantity: 1,
           measure_id: 4,
           ingredient_group: 'Miso Mayo'
@@ -71,7 +71,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 9,
           recipe_id: 1,
-          ingredients_id: 29,
+          ingredient_id: 29,
           quantity: 2,
           measure_id: 4,
           ingredient_group: 'Miso Mayo'
@@ -79,14 +79,14 @@ exports.seed = function (knex, Promise) {
         {
           id: 10,
           recipe_id: 1,
-          ingredients_id: 30,
+          ingredient_id: 30,
           quantity: 1,
           ingredient_group: 'To Serve'
         },
         {
           id: 11,
           recipe_id: 1,
-          ingredients_id: 31,
+          ingredient_id: 31,
           quantity: 2,
           measure_id: 2,
           ingredient_group: 'To Serve'
@@ -94,21 +94,21 @@ exports.seed = function (knex, Promise) {
         {
           id: 12,
           recipe_id: 2,
-          ingredients_id: 13,
+          ingredient_id: 13,
           quantity: 1,
           ingredient_group: 'ShakShuka Eggs'
         },
         {
           id: 13,
           recipe_id: 2,
-          ingredients_id: 14,
+          ingredient_id: 14,
           quantity: 1,
           ingredient_group: 'ShakShuka Eggs'
         },
         {
           id: 14,
           recipe_id: 2,
-          ingredients_id: 15,
+          ingredient_id: 15,
           quantity: 1,
           measure_id: 2,
           ingredient_group: 'ShakShuka Eggs'
@@ -116,7 +116,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 15,
           recipe_id: 2,
-          ingredients_id: 16,
+          ingredient_id: 16,
           quantity: 2,
           measure_id: 2,
           ingredient_group: 'ShakShuka Eggs'
@@ -124,7 +124,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 16,
           recipe_id: 2,
-          ingredients_id: 17,
+          ingredient_id: 17,
           quantity: 2,
           measure_id: 6,
           ingredient_group: 'ShakShuka Eggs'
@@ -132,7 +132,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 17,
           recipe_id: 2,
-          ingredients_id: 18,
+          ingredient_id: 18,
           quantity: 0.5,
           measure_id: 2,
           ingredient_group: 'ShakShuka Eggs'
@@ -140,7 +140,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 18,
           recipe_id: 2,
-          ingredients_id: 19,
+          ingredient_id: 19,
           quantity: 0.25,
           measure_id: 2,
           ingredient_group: 'ShakShuka Eggs'
@@ -148,14 +148,14 @@ exports.seed = function (knex, Promise) {
         {
           id: 19,
           recipe_id: 2,
-          ingredients_id: 20,
+          ingredient_id: 20,
           quantity: 5,
           ingredient_group: 'ShakShuka Eggs'
         },
         {
           id: 20,
           recipe_id: 2,
-          ingredients_id: 21,
+          ingredient_id: 21,
           quantity: 100,
           measure_id: 3,
           ingredient_group: 'ShakShuka Eggs'
@@ -163,7 +163,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 21,
           recipe_id: 3,
-          ingredients_id: 1,
+          ingredient_id: 1,
           quantity: 200,
           measure_id: 3,
           ingredient_group: 'Mapled Pumpkin'
@@ -171,7 +171,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 22,
           recipe_id: 3,
-          ingredients_id: 2,
+          ingredient_id: 2,
           quantity: 1,
           measure_id: 2,
           ingredient_group: 'Mapled Pumpkin'
@@ -179,14 +179,14 @@ exports.seed = function (knex, Promise) {
         {
           id: 23,
           recipe_id: 3,
-          ingredients_id: 3,
+          ingredient_id: 3,
           quantity: 1,
           ingredient_group: 'Pesto Spaghetti'
         },
         {
           id: 24,
           recipe_id: 3,
-          ingredients_id: 4,
+          ingredient_id: 4,
           quantity: 1,
           measure_id: 5,
           ingredient_group: 'Pesto Spaghetti'
@@ -194,7 +194,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 25,
           recipe_id: 3,
-          ingredients_id: 5,
+          ingredient_id: 5,
           quantity: 1,
           measure_id: 7,
           ingredient_group: 'Pesto Spaghetti'
@@ -202,7 +202,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 26,
           recipe_id: 3,
-          ingredients_id: 6,
+          ingredient_id: 6,
           quantity: 250,
           measure_id: 3,
           ingredient_group: 'Pesto Spaghetti'
@@ -210,7 +210,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 27,
           recipe_id: 3,
-          ingredients_id: 7,
+          ingredient_id: 7,
           quantity: 50,
           measure_id: 3,
           ingredient_group: 'Pesto Spaghetti'
@@ -218,7 +218,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 28,
           recipe_id: 3,
-          ingredients_id: 8,
+          ingredient_id: 8,
           quantity: 0.25,
           measure_id: 1,
           ingredient_group: 'Pesto Spaghetti'
@@ -226,7 +226,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 29,
           recipe_id: 3,
-          ingredients_id: 9,
+          ingredient_id: 9,
           quantity: 2,
           measure_id: 8,
           ingredient_group: 'Pesto Spaghetti'
@@ -234,7 +234,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 30,
           recipe_id: 3,
-          ingredients_id: 10,
+          ingredient_id: 10,
           quantity: 30,
           measure_id: 3,
           ingredient_group: 'Pesto Spaghetti'
@@ -242,7 +242,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 31,
           recipe_id: 3,
-          ingredients_id: 11,
+          ingredient_id: 11,
           quantity: 3,
           measure_id: 4,
           ingredient_group: 'To Serve'
@@ -250,7 +250,7 @@ exports.seed = function (knex, Promise) {
         {
           id: 32,
           recipe_id: 3,
-          ingredients_id: 12,
+          ingredient_id: 12,
           quantity: 20,
           measure_id: 3,
           ingredient_group: 'To Serve'

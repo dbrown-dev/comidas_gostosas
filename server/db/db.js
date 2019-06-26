@@ -48,7 +48,7 @@ const getRecipeIngredients = (id, db = database) => {
   return db('ingredients')
     .join(
       'ingredients_recipes',
-      'ingredients_recipes.ingredients_id',
+      'ingredients_recipes.ingredient_id',
       'ingredients.id'
     )
     .join('recipes', 'ingredients_recipes.recipe_id', 'recipes.id')
@@ -65,49 +65,47 @@ const getRecipeIngredients = (id, db = database) => {
     .groupBy('ingredients.id')
 }
 
-const insertRecipe = (recipe, db = database) => {
+const getCookTimeOptions = (db = database) => {
+  return db('cook_time').select()
+}
+
+const insertRecipe = (
+  recipeSummary,
+  cuisineCategories,
+  ingredients,
+  instructions,
+  db = database
+) => {
   return db.transaction(trx => {
+    console.log(recipeSummary)
     return db('recipes')
-      .insert({
-        title: recipe.title,
-        season: recipe.season,
-        image: recipe.image,
-        cook_time_id: recipe.timeOption
-      })
+      .insert(recipeSummary)
       .transacting(trx)
       .then(ids => {
         const id = ids[0]
-        const cuisineCategories = recipe.cuisineCategories.map(category => {
+        const formattedCategories = cuisineCategories.map(category => {
           return { recipe_id: id, category_id: category }
         })
         return db('cuisine_categories_recipes')
-          .insert(cuisineCategories)
+          .insert(formattedCategories)
           .transacting(trx)
           .then(() => {
-            const ingredients = recipe.ingredients.map(category => {
-              return {
-                recipe_id: id,
-                ingredients_id: category.ingredientId,
-                quantity: category.quantity,
-                measure_id: category.measurementId,
-                ingredient_group: category.ingredientGroup
-              }
+            const formattedIngredients = ingredients.map(ingredient => {
+              ingredient.recipe_id = id
+              return ingredient
             })
             return db('ingredients_recipes')
-              .insert(ingredients)
+              .insert(formattedIngredients)
               .transacting(trx)
-              .then(() => {
-                const instructions = recipe.instructions.map(instruction => {
-                  return {
-                    recipe_id: id,
-                    instruction: instruction.instruction,
-                    image: instruction.image
-                  }
-                })
-                return db('instructions')
-                  .insert(instructions)
-                  .transacting(trx)
-              })
+          })
+          .then(() => {
+            const FormattedInstructions = instructions.map(instruction => {
+              instruction.recipe_id = id
+              return instruction
+            })
+            return db('instructions')
+              .insert(FormattedInstructions)
+              .transacting(trx)
           })
       })
       .then(trx.commit)
@@ -165,7 +163,6 @@ const updateRecipeById = (id, recipe, db = database) => {
                   .transacting(trx)
               })
           })
-
       })
       .then(trx.commit)
       .catch(trx.rollback)
@@ -180,6 +177,7 @@ module.exports = {
   getRecipeSummaries,
   getRecipeInstructions,
   getRecipeIngredients,
+  getCookTimeOptions,
   insertRecipe,
   updateRecipeById,
   close

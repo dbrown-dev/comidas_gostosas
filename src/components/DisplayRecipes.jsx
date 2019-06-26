@@ -9,12 +9,12 @@ export default class DisplayRecipes extends React.Component {
     this.state = {}
   }
 
-  getAllRecipes = (recipes) => {
+  showAllRecipes = (recipes) => {
     this.setState({recipes})
   }
 
   componentDidMount() {
-    getRecipesSummary(this.getAllRecipes)
+    getRecipesSummary(this.showAllRecipes)
   }
 
   render() {
@@ -28,8 +28,8 @@ export default class DisplayRecipes extends React.Component {
                 <Link to={`/recipe/${recipe.id}`}><h2>{recipe.title}</h2></Link>
                 <p>{recipe.season}</p>
                 <p>{recipe.rating}</p>
-                <p>{recipe.time_options}</p>
-                {recipe.cuisine_categories.map(cat => (
+                <p>{recipe.timeOptions}</p>
+                {recipe.cuisineCategories.map(cat => (
                   <span> {cat} </span>
                 ))}
               </div>

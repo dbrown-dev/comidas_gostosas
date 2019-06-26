@@ -3,6 +3,15 @@ import { Form, TextArea } from 'semantic-ui-react'
 
 export const TextInput = ({ field, form: { touched, errors }, ...props }) => (
   <div>
+          <TextField
+        id="outlined-name"
+        label="Name"
+        className={classes.textField}
+        value={values.name}
+        onChange={handleChange('name')}
+        margin="normal"
+        variant="outlined"
+      />
     <Form.Input {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
       <div style={{ display: 'block' }} class="ui error message">
@@ -17,8 +26,7 @@ export const TextInput = ({ field, form: { touched, errors }, ...props }) => (
 export const SelectInput = ({ field, form: { touched, errors }, ...props }) => (
   <div>
     <Form.Field control="select" {...field} {...props}>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
+      {props.options}
     </Form.Field>
     {touched[field.name] && errors[field.name] && (
       <div style={{ display: 'block' }} class="ui error message">

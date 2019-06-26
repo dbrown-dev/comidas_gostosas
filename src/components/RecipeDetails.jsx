@@ -1,23 +1,21 @@
 import React from 'react'
 
+import { getRecipeDetail } from './util/api'
+
 export default class RecipeDetails extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
-  getRecipe = id => {
-    return fetch(`/api/recipes/${id}`)
-      .then(response => {
-        return response.json()
-      })
-      .then(jsonResponse => {
-        this.setState({ recipe: jsonResponse })
-      })
+
+  
+  showRecipeDetail = recipe => {
+    this.setState({recipe})
   }
 
   componentDidMount() {
-    this.getRecipe(this.props.match.params.id)
+    getRecipeDetail(this.props.match.params.id, this.showRecipeDetail)
   }
 
   render() {
@@ -29,8 +27,8 @@ export default class RecipeDetails extends React.Component {
             <h1>{recipe.title}</h1>
             <p>{recipe.title}</p>
             <p>{recipe.rating}</p>
-            <p>{recipe.time_options}</p>
-            {recipe.cuisine_categories.map(cat => (
+            <p>{recipe.timeOptions}</p>
+            {recipe.cuisineCategories.map(cat => (
               <span> {cat} </span>
             ))}
           </div>
@@ -39,7 +37,7 @@ export default class RecipeDetails extends React.Component {
             {recipe.ingredients.map(ingredient => (
               <p>
                 {' '}
-                {ingredient.quantity} {ingredient.measurement_name} of{' '}
+                {ingredient.quantity} {ingredient.measurementName} of{' '}
                 {ingredient.name}{' '}
               </p>
             ))}
