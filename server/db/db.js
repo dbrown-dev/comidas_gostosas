@@ -4,6 +4,7 @@ const database = require('knex')(config)
 const getRecipeSummaries = (id, db = database) => {
   return db('recipes')
     .join('cook_time', 'recipes.cook_time_id', 'cook_time.id')
+    .join('seasons', 'recipes.season_id', 'seasons.id')
     .join(
       'cuisine_categories_recipes',
       'recipes.id',
@@ -17,7 +18,7 @@ const getRecipeSummaries = (id, db = database) => {
     .select(
       'recipes.id',
       'recipes.title',
-      'recipes.season',
+      'seasons.season',
       'recipes.rating',
       'recipes.image',
       'cook_time.time_options',

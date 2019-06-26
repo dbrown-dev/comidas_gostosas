@@ -8,25 +8,25 @@ exports.seed = function (knex, Promise) {
         {
           id: 1,
           title: 'Miso Ginger Tofu and Rice Bowl',
-          season: 'Summer',
+          season_id: 1,
           rating: 4.8,
-          image: '/images/food.png',
+          image: '/images/ginger_miso.jpg',
           cook_time_id: 1
         },
         {
           id: 2,
           title: 'Shakshuka',
-          season: 'Winter',
+          season_id: 3,
           rating: 4.8,
-          image: '/images/food.png',
+          image: '/images/shakshuka.jpg',
           cook_time_id: 2
         },
         {
           id: 3,
-          title: 'Pesto Spaghetti with Pumpkin, Rockert, Olives and Cherry Tomatoes',
-          season: 'Summer',
+          title: 'Pesto Spaghetti with Pumpkin',
+          season_id: 1,
           rating: 4.4,
-          image: '/images/food.png',
+          image: '/images/Pesto-Pasta.jpg',
           cook_time_id: 1
         }
       ])
