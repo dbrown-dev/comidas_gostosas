@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles({
   photoBanner: {
-    background: 'url(/images/banner.jpg) no-repeat fixed',
+    background: 'url(/images/banner.jpg) no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'bottom',
     height: '350px'
