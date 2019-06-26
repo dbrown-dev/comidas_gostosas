@@ -1,26 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { CssBaseline } from '@material-ui/core'
+import { getRecipesSummary } from './components/util/api'
+import Home from './components/Home'
 
-import DisplayRecipes from './components/DisplayRecipes'
-import RecipeDetails from './components/RecipeDetails'
-import Error404 from './components/Error404'
-import AddRecipe from './components/AddRecipe'
-import ModifyRecipe from './components/ModifyRecipe'
+export default class extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
 
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <Route path="/" exact component={DisplayRecipes} />
-          <Route path="/mod" exact component={ModifyRecipe} />
-          <Route path="/add" exact component={AddRecipe} />
-          <Route path="/recipe/:id" component={RecipeDetails} />
-          <Route component={Error404} />
-        </Switch>
-      </div>
-    </Router>
-  )
+  displayAllRecipes = recipes => {
+    this.setState({ recipes })
+  }
+
+  componentDidMount() {
+    getRecipesSummary(this.displayAllRecipes)
+  }
+
+  render() {
+    const { recipes } = this.state
+    return (
+      <Router>
+        <CssBaseline />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={routeProps => <Home recipes={recipes} {...routeProps} />}
+            />
+            {/* <Route path="/:id" component={RecipeDetails} />
+            <Route component={Error404} /> */}
+          </Switch>
+      </Router>
+    )
+  }
 }
-
-export default App

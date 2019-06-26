@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { getRecipesSummary } from './util/api'
+import { getRecipesSummary } from '../components/util/api'
 
 export default class DisplayRecipes extends React.Component {
   constructor(props) {

@@ -10,16 +10,16 @@ import {
   Divider
 } from 'semantic-ui-react'
 
-import { Debug } from './Debug'
+import { Debug } from '../components/util/Debug'
 import Thumb from './Thumb'
 import {
   TextInput,
   SelectInput,
   FileInput,
   TextAreaInput
-} from './util/FormHelper'
+} from './FormHelper'
 
-import { getCookTimes } from './util/api'
+import { getCookTimes } from '../components/util/api'
 
 const validationSchema = Yup.object({
   title: Yup.string().required('Required'),

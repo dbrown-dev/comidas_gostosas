@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik, Form, Field, FieldArray } from 'formik'
 import * as Yup from 'yup'
 
-import { Debug } from './Debug'
+import { Debug } from '../components/util/Debug'
 
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
@@ -19,7 +19,7 @@ import {
   TextAreaInput
 } from './util/FormHelper'
 
-import { getCookTimes } from './util/api'
+import { getCookTimes } from '../components/util/api'
 
 const styles = {
   paper: {

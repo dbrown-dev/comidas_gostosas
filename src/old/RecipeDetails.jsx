@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getRecipeDetail } from './util/api'
+import { getRecipeDetail } from '../components/util/api'
 
 export default class RecipeDetails extends React.Component {
   constructor(props) {
