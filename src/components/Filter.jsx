@@ -16,8 +16,18 @@ export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
   const [category, setCategory] = React.useState([])
 
 
-  function handleChange(event) {
-    setPersonName(event.target.value);
+  const handleSeasonChange = (event) => {
+    setSeason(event.target.value);
+  }
+
+  const handleTimeChange = (event) => {
+    setTime(event.target.value);
+    onFilterChange({season, time, category})
+  }
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+    onFilterChange({season, time, category})
   }
 
   return (
@@ -29,13 +39,13 @@ export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
             <Select
               multiple
               value={season}
-              onChange={handleChange}
+              onChange={handleSeasonChange}
               input={<Input id="season-select" />}
               renderValue={selected => selected.join(', ')}
             >
               {names.map(name => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={personName.indexOf(name) > -1} />
+                  <Checkbox checked={season.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}
@@ -49,38 +59,38 @@ export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
               color='inherit'
               multiple
               value={time}
-              onChange={handleChange}
+              onChange={handleTimeChange}
               input={<Input id="time-select" />}
               renderValue={selected => selected.join(', ')}
             >
               {cookTime.map(time => (
-                <MenuItem key={time} value={time}>
-                  <Checkbox checked={personName.indexOf(time) > -1} />
-                  <ListItemText primary={time} />
+                <MenuItem key={time.id} value={time.timeOptions}>
+                  <Checkbox checked={cookTime.indexOf(time) > -1} />
+                  <ListItemText primary={time.timeOptions} />
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        {/* <Grid item xs={12} sm={6} md={4}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="category-select">Category</InputLabel>
             <Select
               multiple
               value={category}
-              onChange={handleChange}
+              onChange={handleCategoryChange}
               input={<Input id="category-select" />}
               renderValue={selected => selected.join(', ')}
             >
               {names.map(name => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={personName.indexOf(name) > -1} />
+                  <Checkbox checked={category.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Paper>
   )

@@ -11,13 +11,15 @@ export default class extends Component {
   }
 
   onFilterChange = query => {
-    getRecipesSummary().then(recipes => {
+    getRecipesSummary(recipes => {
+      console.log(query)
+      console.log(recipes)
       this.setState({
         recipes: recipes.filter(
           recipe => {
-            (query.season.length === 0 || recipe.season.some(season => query.season.includes(season))) && 
-            (query.time.length === 0 || recipe.time.some(time => query.season.includes(time))) && 
-            (query.category.length === 0 || recipe.category.some(category => query.category.includes(category))) 
+            (query.season.length === 0 || recipe.season.some(season => query.season.includes(season))) &&
+              (query.time.length === 0 || recipe.time.some(time => query.season.includes(time))) &&
+              (query.category.length === 0 || recipe.category.some(category => query.category.includes(category)))
           }
         )
       })

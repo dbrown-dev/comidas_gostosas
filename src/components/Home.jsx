@@ -51,7 +51,7 @@ export default props => {
     <>
       <Header />
       <Container maxWidth="false" className={classes.photoBanner} >
-        <Filter classes={classes} handleFilterChange={handleFilterChange} onFilterChange={onFilterChange} cookTime={cookTime} />
+        {cookTime && <Filter classes={classes} handleFilterChange={handleFilterChange} onFilterChange={onFilterChange} cookTime={cookTime} />}
       </Container>
       {recipes && <ListRecipes classes={classes} recipes={recipes} />}
     </>
