@@ -11,9 +11,9 @@ const names = [
 
 export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
 
-  const [season, setSeason] = React.useState([])
-  const [time, setTime] = React.useState([])
-  const [category, setCategory] = React.useState([])
+  const [seasonState, setSeason] = React.useState([])
+  const [timeState, setTime] = React.useState([...cookTime])
+  const [categoryState, setCategory] = React.useState([])
 
 
   const handleSeasonChange = (event) => {
@@ -22,12 +22,11 @@ export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
 
   const handleTimeChange = (event) => {
     setTime(event.target.value);
-    onFilterChange({season, time, category})
+    onFilterChange({timeState, categoryState})
   }
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
-    onFilterChange({season, time, category})
   }
 
   return (
@@ -38,14 +37,14 @@ export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
             <InputLabel htmlFor="season-select">Season</InputLabel>
             <Select
               multiple
-              value={season}
+              value={seasonState}
               onChange={handleSeasonChange}
               input={<Input id="season-select" />}
               renderValue={selected => selected.join(', ')}
             >
               {names.map(name => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={season.indexOf(name) > -1} />
+                  <Checkbox checked={seasonState.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}
@@ -58,14 +57,14 @@ export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
             <Select
               color='inherit'
               multiple
-              value={time}
+              value={timeState}
               onChange={handleTimeChange}
               input={<Input id="time-select" />}
               renderValue={selected => selected.join(', ')}
             >
               {cookTime.map(time => (
-                <MenuItem key={time.id} value={time.timeOptions}>
-                  <Checkbox checked={cookTime.indexOf(time) > -1} />
+                <MenuItem key={time.id} value={time.id}>
+                  <Checkbox checked={timeState.indexOf(time) > -1} />
                   <ListItemText primary={time.timeOptions} />
                 </MenuItem>
               ))}
