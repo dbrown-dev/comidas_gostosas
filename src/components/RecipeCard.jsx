@@ -1,31 +1,38 @@
 import React from 'react'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Box } from '@material-ui/core'
 
 
-export default ({recipe, classes}) => {
+export default ({ recipe, classes }) => {
   return (
     <Card className={classes.recipeCard}>
       <CardActionArea>
         <CardMedia
           className={classes.cardMedia}
           image={recipe.image}
-          title="Contemplative Reptile"
+          title={recipe.title}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {recipe.title}
+          <Box className={classes.cardTitle}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {recipe.title}
+            </Typography>
+          </Box>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Season: {recipe.season}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            Time: {recipe.timeOptions}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Rating: {recipe.rating}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="secondary">
           Share
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="secondary">
           Learn More
         </Button>
       </CardActions>
