@@ -9,14 +9,16 @@ const names = [
 ];
 
 
-export default ({ classes, handleFilterChange, cookTime }) => {
+export default ({ classes, handleFilterChange, cookTime, onFilterChange }) => {
 
-  const [personName, setPersonName] = React.useState([]);
+  const [season, setSeason] = React.useState([])
+  const [time, setTime] = React.useState([])
+  const [category, setCategory] = React.useState([])
+
 
   function handleChange(event) {
     setPersonName(event.target.value);
   }
-
 
   return (
     <Paper elevation="15" className={classes.filter}>
@@ -26,7 +28,7 @@ export default ({ classes, handleFilterChange, cookTime }) => {
             <InputLabel htmlFor="season-select">Season</InputLabel>
             <Select
               multiple
-              value={personName}
+              value={season}
               onChange={handleChange}
               input={<Input id="season-select" />}
               renderValue={selected => selected.join(', ')}
@@ -46,7 +48,7 @@ export default ({ classes, handleFilterChange, cookTime }) => {
             <Select
               color='inherit'
               multiple
-              value={personName}
+              value={time}
               onChange={handleChange}
               input={<Input id="time-select" />}
               renderValue={selected => selected.join(', ')}
@@ -65,7 +67,7 @@ export default ({ classes, handleFilterChange, cookTime }) => {
             <InputLabel htmlFor="category-select">Category</InputLabel>
             <Select
               multiple
-              value={personName}
+              value={category}
               onChange={handleChange}
               input={<Input id="category-select" />}
               renderValue={selected => selected.join(', ')}

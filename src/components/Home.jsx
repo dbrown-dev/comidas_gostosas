@@ -46,12 +46,12 @@ const useStyles = makeStyles(theme => ({
 
 export default props => {
   const classes = useStyles(props)
-  const { recipes, cookTime, handleFilterChange } = props
+  const { recipes, cookTime, handleFilterChange, onFilterChange } = props
   return (
     <>
       <Header />
       <Container maxWidth="false" className={classes.photoBanner} >
-        <Filter classes={classes} handleFilterChange={handleFilterChange} cookTime={cookTime} />
+        <Filter classes={classes} handleFilterChange={handleFilterChange} onFilterChange={onFilterChange} cookTime={cookTime} />
       </Container>
       {recipes && <ListRecipes classes={classes} recipes={recipes} />}
     </>

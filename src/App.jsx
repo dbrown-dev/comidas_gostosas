@@ -10,6 +10,20 @@ export default class extends Component {
     this.state = {}
   }
 
+  onFilterChange = query => {
+    getRecipesSummary().then(recipes => {
+      this.setState({
+        recipes: recipes.filter(
+          recipe => {
+            (query.season.length === 0 || recipe.season.some(season => query.season.includes(season))) && 
+            (query.time.length === 0 || recipe.time.some(time => query.season.includes(time))) && 
+            (query.category.length === 0 || recipe.category.some(category => query.category.includes(category))) 
+          }
+        )
+      })
+    })
+  }
+
   displayAllRecipes = recipes => {
     this.setState({ recipes })
   }
@@ -39,7 +53,7 @@ export default class extends Component {
           <Route
             exact
             path="/"
-            render={routeProps => <Home recipes={recipes} cookTime={cookTime} handleFilterChange={this.handleFilterChange} {...routeProps} />}
+            render={routeProps => <Home recipes={recipes} onFilterChange={this.onFilterChange} cookTime={cookTime} handleFilterChange={this.handleFilterChange} {...routeProps} />}
           />
           {/* <Route path="/:id" component={RecipeDetails} />
             <Route component={Error404} /> */}
