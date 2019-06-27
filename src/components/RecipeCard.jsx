@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Box } from '@material-ui/core'
 
 
-export default ({ recipe, classes }) => {
+const RecipeCard = ({ recipe, classes }) => {
   return (
     <Card className={classes.recipeCard}>
       <CardActionArea>
@@ -33,11 +33,11 @@ export default ({ recipe, classes }) => {
           Share
         </Button>
         <Button size="small" color="secondary">
-          Learn More
+          Details
         </Button>
       </CardActions>
     </Card>
   )
 }
 
-
+export default RecipeCard

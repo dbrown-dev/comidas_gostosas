@@ -70,6 +70,14 @@ const getCookTimeOptions = (db = database) => {
   return db('cook_time').select()
 }
 
+const getSeasons = (db = database) => {
+  return db('seasons').select()
+}
+
+const getCategories = (db = database) => {
+  return db('cuisine_categories').select()
+}
+
 const insertRecipe = (
   recipeSummary,
   cuisineCategories,
@@ -181,6 +189,8 @@ module.exports = {
   getCookTimeOptions,
   insertRecipe,
   updateRecipeById,
+  getSeasons,
+  getCategories,
   close
 }
 // getRecipeIngredient(1).then(data => {

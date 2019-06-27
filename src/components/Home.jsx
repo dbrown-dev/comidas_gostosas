@@ -1,9 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import Header from './Header'
-import Filter from './Filter'
+
 import ListRecipes from './ListRecipes'
-import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   photoBanner: {
@@ -12,23 +11,25 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: 'bottom',
     height: '350px'
   },
-  filter: {
+  appTitle: {
+    fontFamily: 'Chewy',
     position: 'relative',
-    top: '45%',
+    fontSize: '9rem',
+    textAlign: 'center',
+    margin: '0 auto',
+    top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '40%',
-    background: theme.palette.primary.main,
-    color: 'white',
-    borderRadius: 10
+    color: '#FFF',
   },
   formControl: {
     margin: 10,
     fullWidth: true,
-    backgroundColor: '#FFF',
     display: 'flex',
     wrap: 'nowrap',
-    borderRadius: 10
+  },
+  white: {
+    color: '#FFF'
   },
   recipeList: {
     marginTop: 40
@@ -44,16 +45,21 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default props => {
+const Home = props => {
   const classes = useStyles(props)
-  const { recipes, cookTime, handleFilterChange, onFilterChange } = props
+  const { recipes, cookTime, onFilterChange, categories, seasons } = props
   return (
     <>
-      <Header />
-      <Container maxWidth="false" className={classes.photoBanner} >
-        {cookTime && <Filter classes={classes} handleFilterChange={handleFilterChange} onFilterChange={onFilterChange} cookTime={cookTime} />}
-      </Container>
+      <Header
+        classes={classes}
+        onFilterChange={onFilterChange}
+        categories={categories}
+        seasons={seasons}
+        cookTime={cookTime}
+      />
       {recipes && <ListRecipes classes={classes} recipes={recipes} />}
     </>
   )
 }
+
+export default Home

@@ -1,53 +1,56 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { CssBaseline } from '@material-ui/core'
-import { getRecipesSummary, getCookTimes } from './components/util/api'
+import {
+  getRecipesSummary,
+  getCookTimes,
+  getCategories,
+  getSeasons
+} from './components/util/api'
 import Home from './components/Home'
 
-export default class extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
   onFilterChange = query => {
-    getRecipesSummary(recipes => {
-      console.log(query)
-      console.log(recipes)
+    getRecipesSummary().then(recipes => {
       this.setState({
         recipes: recipes.filter(
-          recipe => {
-            (query.season.length === 0 || recipe.season.some(season => query.season.includes(season))) &&
-              (query.time.length === 0 || recipe.time.some(time => query.season.includes(time))) &&
-              (query.category.length === 0 || recipe.category.some(category => query.category.includes(category)))
-          }
+          recipe =>
+            (query.seasonState.length === 0 ||
+              query.seasonState.includes(recipe.season)) &&
+            (query.timeState.length === 0 ||
+              query.timeState.includes(recipe.timeOptions)) &&
+            (query.categoryState.length === 0 ||
+              query.categoryState.every(category =>
+                recipe.cuisineCategories.includes(category)
+              ))
         )
       })
     })
   }
 
-  displayAllRecipes = recipes => {
-    this.setState({ recipes })
-  }
-
-  displayCookTime = cookTime => {
-    this.setState({ cookTime })
-  }
-
-  handleFilterChange = event => {
-    const target = event.target;
-    const value = target.checked
-    const name = target.name;
-    this.setState({ [name]: value })
+  getInitialDisplayData = () => {
+    getRecipesSummary().then(recipes =>
+      getCookTimes().then(cookTime =>
+        getCategories().then(categories =>
+          getSeasons().then(seasons => {
+            this.setState({ recipes, cookTime, categories, seasons })
+          })
+        )
+      )
+    )
   }
 
   componentDidMount() {
-    getRecipesSummary(this.displayAllRecipes)
-    getCookTimes(this.displayCookTime)
+    this.getInitialDisplayData()
   }
 
   render() {
-    const { recipes, cookTime, handleFilterChange } = this.state
+    const { recipes, cookTime, seasons, categories } = this.state
     return (
       <Router>
         <CssBaseline />
@@ -55,7 +58,16 @@ export default class extends Component {
           <Route
             exact
             path="/"
-            render={routeProps => <Home recipes={recipes} onFilterChange={this.onFilterChange} cookTime={cookTime} handleFilterChange={this.handleFilterChange} {...routeProps} />}
+            render={routeProps => (
+              <Home
+                recipes={recipes}
+                onFilterChange={this.onFilterChange}
+                seasons={seasons}
+                categories={categories}
+                cookTime={cookTime}
+                {...routeProps}
+              />
+            )}
           />
           {/* <Route path="/:id" component={RecipeDetails} />
             <Route component={Error404} /> */}

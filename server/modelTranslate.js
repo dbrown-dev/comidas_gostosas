@@ -29,6 +29,18 @@ const formatCookTimes = () => {
   })
 }
 
+const formatSeasons = () => {
+  return db.getSeasons().then(seasons => {
+    return seasons.map(season => toCamelCase(season))
+  })
+}
+
+const formatCategories = () => {
+  return db.getCategories().then(categories => {
+    return categories.map(category => toCamelCase(category))
+  })
+}
+
 const formatRecipeDetails = recipeId => {
   return db
     .getRecipeSummaries(recipeId)
@@ -89,5 +101,7 @@ module.exports = {
   formatRecipeDetails,
   formatRecipeSummaries,
   formatInsertRecipe,
-  formatCookTimes
+  formatCookTimes,
+  formatSeasons,
+  formatCategories
 }
