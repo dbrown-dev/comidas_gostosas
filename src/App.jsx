@@ -34,15 +34,20 @@ export default class App extends Component {
   }
 
   getInitialDisplayData = () => {
-    getRecipesSummary().then(recipes =>
-      getCookTimes().then(cookTime =>
-        getCategories().then(categories =>
-          getSeasons().then(seasons => {
-            this.setState({ recipes, cookTime, categories, seasons })
-          })
+    Promise.all([
+      getRecipesSummary(),
+      getCookTimes(),
+      getCategories(),
+      getSeasons()
+    ]).then(responses => {
+      const keys = ['recipes', 'cookTime', 'categories', 'seasons']
+      this.setState(
+        responses.reduce(
+          (obj, response, i) => ({ ...obj, [keys[i]]: response }),
+          {}
         )
       )
-    )
+    })
   }
 
   componentDidMount() {
