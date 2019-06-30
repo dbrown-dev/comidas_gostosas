@@ -51,8 +51,6 @@ export default class App extends Component {
     })
   }
 
-  getRecipeDetails
-
   componentDidMount() {
     this.getInitialDisplayData()
   }
