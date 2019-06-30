@@ -10,6 +10,7 @@ router.get('/:id', (req, res) => {
   modelTranslate
     .formatRecipeDetails(recipeId)
     .then(recipe => {
+      console.log(recipe)
       res.json(recipe)
     })
     .catch(err => {

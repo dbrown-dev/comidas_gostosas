@@ -1,6 +1,15 @@
 import React from 'react'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Box } from '@material-ui/core'
-
+import { Link } from 'react-router-dom'
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  Box
+} from '@material-ui/core'
 
 const RecipeCard = ({ recipe, classes }) => {
   return (
@@ -32,9 +41,11 @@ const RecipeCard = ({ recipe, classes }) => {
         <Button size="small" color="secondary">
           Share
         </Button>
-        <Button size="small" color="secondary">
-          Details
-        </Button>
+        <Link to={`/${recipe.id}`}>
+          <Button size="small" color="secondary">
+            Details
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   )

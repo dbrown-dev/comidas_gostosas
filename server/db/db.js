@@ -63,7 +63,7 @@ const getRecipeIngredients = (id, db = database) => {
     )
     .orderBy('ingredients.id')
     .where('recipes.id', id)
-    .groupBy('ingredients.id')
+
 }
 
 const getCookTimeOptions = (db = database) => {

@@ -56,6 +56,7 @@ const Home = props => {
         categories={categories}
         seasons={seasons}
         cookTime={cookTime}
+        displayFilter={true}
       />
       {recipes && <ListRecipes classes={classes} recipes={recipes} />}
     </>

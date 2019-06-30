@@ -13,7 +13,8 @@ const theme = createMuiTheme({
     secondary: {
       main: '#4a148c'
     }
-  }
+  },
+  spacing: 8
 })
 
 ReactDOM.render(

@@ -8,6 +8,7 @@ import {
   getSeasons
 } from './components/util/api'
 import Home from './components/Home'
+import RecipeDisplay from './components/RecipeDisplay'
 
 export default class App extends Component {
   constructor(props) {
@@ -50,6 +51,8 @@ export default class App extends Component {
     })
   }
 
+  getRecipeDetails
+
   componentDidMount() {
     this.getInitialDisplayData()
   }
@@ -70,12 +73,22 @@ export default class App extends Component {
                 seasons={seasons}
                 categories={categories}
                 cookTime={cookTime}
+                displayFilter={true}
                 {...routeProps}
               />
             )}
           />
-          {/* <Route path="/:id" component={RecipeDetails} />
-            <Route component={Error404} /> */}
+          <Route
+            exact
+            path="/:id"
+            render={routeProps => (
+              <RecipeDisplay
+                displayFilter={false}
+                {...routeProps}
+              />
+            )}
+          />
+          {/* <Route component={Error404} /> */}
         </Switch>
       </Router>
     )
