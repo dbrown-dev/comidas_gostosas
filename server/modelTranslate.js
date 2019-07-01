@@ -41,6 +41,16 @@ const formatCategories = () => {
   })
 }
 
+const formatMeasurements = async () => {
+  const measurements = await db.getMeasurements()
+  return measurements.map(measurement => toCamelCase(measurement))
+}
+
+const formatIngredients = async () => {
+  const ingredients = await db.getIngredients()
+  return ingredients.map(ingredient => toCamelCase(ingredient))
+}
+
 const formatRecipeDetails = recipeId => {
   return db
     .getRecipeSummaries(recipeId)
@@ -103,5 +113,7 @@ module.exports = {
   formatInsertRecipe,
   formatCookTimes,
   formatSeasons,
-  formatCategories
+  formatCategories,
+  formatMeasurements,
+  formatIngredients
 }

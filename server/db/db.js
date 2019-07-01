@@ -78,6 +78,14 @@ const getCategories = (db = database) => {
   return db('cuisine_categories').select()
 }
 
+const getIngredients = (db = database) => {
+  return db('ingredients').select()
+}
+
+const getMeasurements = (db = database) => {
+  return db('measurements').select()
+}
+
 const insertRecipe = (
   recipeSummary,
   cuisineCategories,
@@ -191,6 +199,8 @@ module.exports = {
   updateRecipeById,
   getSeasons,
   getCategories,
+  getIngredients,
+  getMeasurements,
   close
 }
 // getRecipeIngredient(1).then(data => {
