@@ -9,6 +9,8 @@ import {
 } from './components/util/api'
 import Home from './components/Home'
 import RecipeDisplay from './components/RecipeDisplay'
+import AddRecipe from './components/AddRecipe'
+
 
 export default class App extends Component {
   constructor(props) {
@@ -78,6 +80,15 @@ export default class App extends Component {
           />
           <Route
             exact
+            path="/add"
+            render={routeProps => (
+              <AddRecipe
+                displayFilter={false}
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
             path="/:id"
             render={routeProps => (
               <RecipeDisplay
