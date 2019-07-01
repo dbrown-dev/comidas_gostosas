@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 
 import Header from './Header'
 import { addValidationSchema } from './util/yup'
 import { useStyles } from './util/muiStyles'
 import AddRecipeForm from './AddRecipeForm/AddRecipeForm'
+import { getCookTimes, getSeasons, getCategories } from './util/api'
 
 const initialValues = {
   title: '',
@@ -36,20 +37,66 @@ const handleSubmit = values => {
 
 const Home = props => {
   const classes = useStyles(props)
+
+  const [seasonList, setSeasonList] = useState()
+  const [timeList, setTimeList] = useState()
+  const [categoriesList, setCategoriesList] = useState()
+  const [isError, setIsError] = useState(false)
+
+  useEffect(() => {
+    const getTimeOptions = async () => {
+      try {
+        const timeListData = await getCookTimes()
+        setTimeList(timeListData)
+      } catch {
+        setIsError(true)
+      }
+    }
+    getTimeOptions()
+  }, [])
+
+  useEffect(() => {
+    const getSeasonOptions = async () => {
+      try {
+        const seasonListData = await getSeasons()
+        setSeasonList(seasonListData)
+      } catch {
+        setIsError(true)
+      }
+    }
+    getSeasonOptions()
+  }, [])
+
+  useEffect(() => {
+    const getCategoriesOptions = async () => {
+      try {
+        const categoriesListData = await getCategories()
+        setCategoriesList(categoriesListData)
+      } catch {
+        setIsError(true)
+      }
+    }
+    getCategoriesOptions()
+  }, [])
+
   return (
     <>
-      <Header
-        classes={classes}
-        displayFilter={false}
-      />
+      <Header classes={classes} displayFilter={false} />
       <Formik
         initialValues={initialValues}
         validationSchema={addValidationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, isSubmitting, handleSubmit, setFieldValue }) => (
-          <AddRecipeForm classes={classes} values={values} isSubmitting={isSubmitting} handleSubmit={handleSubmit} setFieldValue={setFieldValue} />
-        )}
+        {seasonList && timeList && categoriesList &&
+          (props => (
+            <AddRecipeForm
+              {...props}
+              classes={classes}
+              seasonList={seasonList}
+              timeList={timeList}
+              categoriesList={categoriesList}
+            />
+          ))}
       </Formik>
     </>
   )

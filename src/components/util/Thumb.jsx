@@ -1,5 +1,4 @@
 import React from 'react'
-import { Image } from 'semantic-ui-react'
 
 const urls = new WeakMap()
 
@@ -13,9 +12,9 @@ const blobUrl = blob => {
   }
 }
 
-const Thumb = ({ file, size }) => {
+const Thumb = ({ file }) => {
   const url = file && blobUrl(file)
-  return (<Image src={url} size={size} />)
+  return (<img src={url} />)
 }
 
 export default Thumb

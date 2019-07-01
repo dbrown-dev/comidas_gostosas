@@ -10,6 +10,7 @@ import {
 import Home from './components/Home'
 import RecipeDisplay from './components/RecipeDisplay'
 import AddRecipe from './components/AddRecipe'
+import Contact from './components/Test'
 
 
 export default class App extends Component {
@@ -63,6 +64,21 @@ export default class App extends Component {
       <Router>
         <CssBaseline />
         <Switch>
+        <Route
+            exact
+            path="/test"
+            render={routeProps => (
+              <Contact
+                recipes={recipes}
+                onFilterChange={this.onFilterChange}
+                seasons={seasons}
+                categories={categories}
+                cookTime={cookTime}
+                displayFilter={true}
+                {...routeProps}
+              />
+            )}
+          />
           <Route
             exact
             path="/"
