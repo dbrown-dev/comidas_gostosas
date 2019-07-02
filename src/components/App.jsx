@@ -41,12 +41,12 @@ class App extends Component {
 
   getInitialDisplayData = () => {
     Promise.all([
-      getRecipesSummary(),
+      // getRecipesSummary(),
       getCookTimes(),
       getCategories(),
       getSeasons()
     ]).then(responses => {
-      const keys = ['recipes', 'cookTime', 'categories', 'seasons']
+      const keys = ['cookTime', 'categories', 'seasons']
       this.setState(
         responses.reduce(
           (obj, response, i) => ({ ...obj, [keys[i]]: response }),
