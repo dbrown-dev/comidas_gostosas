@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from './Header'
 import ListRecipes from './ListRecipes'
-import { useStyles } from './util/muiStyles'
+import { useStyles } from '../utilities/muiStyles'
 
 
 const Home = props => {

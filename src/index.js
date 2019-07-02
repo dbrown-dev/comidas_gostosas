@@ -1,26 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
-import App from './App'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
+import rootReducer from './reducers/reducer'
+import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#dd2c00'
-    },
-    secondary: {
-      main: '#4a148c'
-    }
-  },
-  spacing: 8
-})
+const store = createStore(rootReducer)
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <Provider store={store}>
     <App />
-  </ThemeProvider>,
+  </Provider>,
   document.getElementById('root')
 )
 

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 
 import Header from './Header'
-import { addValidationSchema } from './util/yup'
-import { useStyles } from './util/muiStyles'
+import { addValidationSchema } from '../utilities/yup'
+import { useStyles } from '../utilities/muiStyles'
 import AddRecipeForm from './AddRecipeForm/AddRecipeForm'
-import { getCookTimes, getSeasons, getCategories } from './util/api'
+import { getCookTimes, getSeasons, getCategories } from '../utilities/api'
 
 const initialValues = {
   title: '',

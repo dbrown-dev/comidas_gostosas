@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Header from './Header'
-import { getRecipeDetail } from './util/api'
+import { getRecipeDetail } from '../utilities/api'
 import RecipeDetails from './RecipeDetails'
-import { useStyles } from './util/muiStyles'
+import { useStyles } from '../utilities/muiStyles'
 
 
 const RecipeDisplay = props => {
