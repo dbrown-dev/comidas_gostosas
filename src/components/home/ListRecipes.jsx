@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import RecipeCard from './RecipeCard'
-import { getRecipesList } from '../actions/recipesList'
+import { getRecipesList } from '../../actions/recipesList'
 
 class ListRecipes extends React.Component {
 

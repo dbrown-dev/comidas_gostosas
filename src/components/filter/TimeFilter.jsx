@@ -10,42 +10,53 @@ import {
   ListItemText
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const TimeFilter = ({ classes, cookTime, timeState, handleTimeChange }) => {
+const TimeFilter = ({ classes, cookTime, selectedTimes, handleTimeChange }) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="time-select" className={classes.white}>Time</InputLabel>
+        <InputLabel htmlFor="time-select" className={classes.white}>
+          Time
+        </InputLabel>
         <Select
           multiple
+          name="time"
           className={classes.select}
-          value={timeState}
+          value={selectedTimes}
           onChange={handleTimeChange}
           input={<Input id="time-select" />}
           inputProps={{
             classes: {
-                icon: classes.icon,
-            },
-        }}
+              icon: classes.icon
+            }
+          }}
           renderValue={selected => selected.join(', ')}
         >
-          {cookTime && cookTime.map(time => (
-            <MenuItem key={time.id} value={time.timeOptions}>
-              <Checkbox checked={timeState.indexOf(time.timeOptions) > -1} />
-              <ListItemText primary={time.timeOptions} />
-            </MenuItem>
-          ))}
+          {cookTime &&
+            cookTime.map(time => (
+              <MenuItem key={time.id} value={time.timeOptions}>
+                <Checkbox checked={selectedTimes.indexOf(time.timeOptions) > -1} />
+                <ListItemText primary={time.timeOptions} />
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </Grid>
   )
 }
 
-export default TimeFilter
+const mapStateToProps = state => {
+  return {
+    selectedTimes: state.filter.selectedTimes
+  }
+}
+
+export default connect(mapStateToProps)(TimeFilter)
 
 TimeFilter.propTypes = {
   classes: PropTypes.object,
   cookTime: PropTypes.array,
-  timeState: PropTypes.array,
+  selectedTimes: PropTypes.array,
   handleTimeChange: PropTypes.func
 }

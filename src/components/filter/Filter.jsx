@@ -1,54 +1,63 @@
 import React from 'react'
 import { Container, Grid } from '@material-ui/core'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import SeasonFilter from './SeasonFilter'
 import TimeFilter from './TimeFilter'
 import CategoryFilter from './CategoryFilter'
 
-const Filter = ({ classes, cookTime, onFilterChange, seasons, categories }) => {
-  const [seasonState, setSeason] = React.useState([])
-  const [timeState, setTime] = React.useState([])
-  const [categoryState, setCategory] = React.useState([])
+import { updateRecipesList } from '../../actions/filter'
+import { getRecipesList } from '../../actions/recipesList'
 
-  React.useEffect(() => {
-    onFilterChange({ timeState, seasonState, categoryState })
-  }, [timeState, seasonState, categoryState])
+const Filter = ({
+  classes,
+  cookTime,
+  seasons,
+  categories,
+  dispatch,
+  filter
+}) => {
 
-  const handleSeasonChange = event => {
-    setSeason(event.target.value)
+
+  const handleFilterChange = (e) => {
+    dispatch(updateRecipesList(e.target.name, e.target.value))
+    dispatch(getRecipesList(filter))
   }
 
-  const handleTimeChange = event => {
-    setTime(event.target.value)
-  }
-
-  const handleCategoryChange = event => {
-    setCategory(event.target.value)
-  }
   return (
     <Container maxWidth="md">
       <Grid container spacing={2}>
         <SeasonFilter
           classes={classes}
           seasons={seasons}
-          seasonState={seasonState}
-          handleSeasonChange={handleSeasonChange}
+          handleSeasonChange={handleFilterChange}
         />
         <TimeFilter
           classes={classes}
           cookTime={cookTime}
-          timeState={timeState}
-          handleTimeChange={handleTimeChange}
+          handleTimeChange={handleFilterChange}
         />
         <CategoryFilter
           classes={classes}
           categories={categories}
-          categoryState={categoryState}
-          handleCategoryChange={handleCategoryChange}
+          handleCategoryChange={handleFilterChange}
         />
       </Grid>
     </Container>
   )
 }
 
-export default Filter
+const mapStateToProps = state => {
+  return {
+    filter: state.filter
+  }
+}
+
+export default connect(mapStateToProps)(Filter)
+
+Filter.propTypes = {
+  classes: PropTypes.object,
+  dispatch: PropTypes.func,
+  filter: PropTypes.object
+}

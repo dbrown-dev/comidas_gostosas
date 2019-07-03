@@ -1,7 +1,8 @@
 import { REQUEST_RECIPES, RECEIVE_RECIPES, SHOW_ERROR } from '../actions/recipesList'
 
-const loading = (state = false, action) => {
-  console.log(action.type)
+const initialState = false
+
+const loading = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_RECIPES:
       return true

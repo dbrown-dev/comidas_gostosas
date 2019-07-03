@@ -24,28 +24,30 @@ export const showError = errorMessage => {
   }
 }
 
-export const getRecipesList = () => {
+export const getRecipesList = filter => {
   return dispatch => {
     dispatch(requestRecipes())
-    return getRecipesSummary().then(recipesList => {
-        dispatch(receiveRecipes(recipesList))
+    return getRecipesSummary()
+      .then(recipesList => {
+        if (filter) {
+          const filteredRecipes = recipesList.filter(
+            recipe =>
+              (filter.selectedSeasons.length === 0 ||
+                filter.selectedSeasons.includes(recipe.season)) &&
+              (filter.selectedTimes.length === 0 ||
+                filter.selectedTimes.includes(recipe.timeOptions)) &&
+              (filter.selectedCategories.length === 0 ||
+                filter.selectedCategories.every(category =>
+                  recipe.cuisineCategories.includes(category)
+                ))
+          )
+          dispatch(receiveRecipes(filteredRecipes))
+        } else {
+          dispatch(receiveRecipes(recipesList))
+        }
       })
       .catch(error => {
         dispatch(showError(error.message))
       })
   }
 }
-
-// export function fetchJoke() {
-//   return (dispatch) => {
-//     dispatch(requestJoke())
-//     return request
-//       .get('/api/v1/joke')
-//       .then(res => {
-//         dispatch(receiveJoke(res.body))
-//       })
-//       .catch(err => {
-//         dispatch(showError(err.message))
-//       })
-//   }
-// }

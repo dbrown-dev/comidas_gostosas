@@ -9,10 +9,9 @@ import {
   getCategories,
   getSeasons
 } from '../utilities/api'
-import Home from './Home'
-import RecipeDisplay from './RecipeDisplay'
-import AddRecipe from './AddRecipe'
-import Contact from './Test'
+import Home from './home/Home'
+import RecipeDisplay from './recipeDetails/RecipeDisplay'
+import AddRecipe from './addRecipeForm/AddRecipe'
 import { theme } from '../style/muiStyles'
 
 class App extends Component {
@@ -67,21 +66,6 @@ class App extends Component {
         <CssBaseline />
         <Router>
           <Switch>
-            <Route
-              exact
-              path="/test"
-              render={routeProps => (
-                <Contact
-                  recipes={recipes}
-                  onFilterChange={this.onFilterChange}
-                  seasons={seasons}
-                  categories={categories}
-                  cookTime={cookTime}
-                  displayFilter={true}
-                  {...routeProps}
-                />
-              )}
-            />
             <Route
               exact
               path="/"
