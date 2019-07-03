@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
 
 import recipesList from './recipesList'
+import error from './error'
+import isLoading from './loading'
 
 export default combineReducers({
+  error,
+  isLoading,
   recipesList
 })
 
