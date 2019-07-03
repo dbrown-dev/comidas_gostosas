@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik'
 
 import Header from './Header'
 import { addValidationSchema } from '../utilities/yup'
-import { useStyles } from '../utilities/muiStyles'
+import { useStyles } from '../style/muiStyles'
 import AddRecipeForm from './AddRecipeForm/AddRecipeForm'
 import { getCookTimes, getSeasons, getCategories } from '../utilities/api'
 

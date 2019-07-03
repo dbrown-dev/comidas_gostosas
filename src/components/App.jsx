@@ -13,7 +13,7 @@ import Home from './Home'
 import RecipeDisplay from './RecipeDisplay'
 import AddRecipe from './AddRecipe'
 import Contact from './Test'
-import { theme } from '../utilities/muiStyles'
+import { theme } from '../style/muiStyles'
 
 class App extends Component {
   constructor(props) {

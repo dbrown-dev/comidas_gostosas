@@ -9,6 +9,7 @@ import {
   Input,
   ListItemText
 } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 const SeasonFilter = ({ classes,  seasons, seasonState, handleSeasonChange }) => {
   return (
@@ -17,9 +18,15 @@ const SeasonFilter = ({ classes,  seasons, seasonState, handleSeasonChange }) =>
             <InputLabel htmlFor="season-select" className={classes.white}>Season</InputLabel>
             <Select
               multiple
+              className={classes.select}
               value={seasonState}
               onChange={handleSeasonChange}
               input={<Input id="season-select" />}
+              inputProps={{
+                classes: {
+                    icon: classes.icon,
+                },
+            }}
               renderValue={selected => selected.join(', ')}
             >
               {seasons && seasons.map(season => (
@@ -36,3 +43,10 @@ const SeasonFilter = ({ classes,  seasons, seasonState, handleSeasonChange }) =>
 }
 
 export default  SeasonFilter
+
+SeasonFilter.propTypes = {
+  classes: PropTypes.object,
+  seasons: PropTypes.array,
+  seasonState: PropTypes.array,
+  handleSeasonChange: PropTypes.func
+}

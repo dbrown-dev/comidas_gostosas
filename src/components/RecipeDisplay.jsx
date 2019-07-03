@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import { getRecipeDetail } from '../utilities/api'
 import RecipeDetails from './RecipeDetails'
-import { useStyles } from '../utilities/muiStyles'
+import { useStyles } from '../style/muiStyles'
 
 
 const RecipeDisplay = props => {

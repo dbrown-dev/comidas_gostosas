@@ -1,4 +1,4 @@
-import {SHOW_ERROR} from '../actions'
+import {SHOW_ERROR} from '../actions/recipesList'
 
 function error (state = '', action) {
   switch (action.type) {

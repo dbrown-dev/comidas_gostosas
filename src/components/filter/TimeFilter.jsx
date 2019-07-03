@@ -9,17 +9,24 @@ import {
   Input,
   ListItemText
 } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 const TimeFilter = ({ classes, cookTime, timeState, handleTimeChange }) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="time-select">Time</InputLabel>
+        <InputLabel htmlFor="time-select" className={classes.white}>Time</InputLabel>
         <Select
           multiple
+          className={classes.select}
           value={timeState}
           onChange={handleTimeChange}
           input={<Input id="time-select" />}
+          inputProps={{
+            classes: {
+                icon: classes.icon,
+            },
+        }}
           renderValue={selected => selected.join(', ')}
         >
           {cookTime && cookTime.map(time => (
@@ -35,3 +42,10 @@ const TimeFilter = ({ classes, cookTime, timeState, handleTimeChange }) => {
 }
 
 export default TimeFilter
+
+TimeFilter.propTypes = {
+  classes: PropTypes.object,
+  cookTime: PropTypes.array,
+  timeState: PropTypes.array,
+  handleTimeChange: PropTypes.func
+}
