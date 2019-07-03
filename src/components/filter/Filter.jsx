@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -12,9 +12,6 @@ import { getRecipesList } from '../../actions/recipesList'
 
 const Filter = ({
   classes,
-  cookTime,
-  seasons,
-  categories,
   dispatch,
   filter
 }) => {
@@ -22,25 +19,25 @@ const Filter = ({
 
   const handleFilterChange = (e) => {
     dispatch(updateRecipesList(e.target.name, e.target.value))
-    dispatch(getRecipesList(filter))
   }
+
+  useEffect(() => {
+    dispatch(getRecipesList(filter))
+  }, [filter])
 
   return (
     <Container maxWidth="md">
       <Grid container spacing={2}>
         <SeasonFilter
           classes={classes}
-          seasons={seasons}
           handleSeasonChange={handleFilterChange}
         />
         <TimeFilter
           classes={classes}
-          cookTime={cookTime}
           handleTimeChange={handleFilterChange}
         />
         <CategoryFilter
           classes={classes}
-          categories={categories}
           handleCategoryChange={handleFilterChange}
         />
       </Grid>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Grid,
   Select,
@@ -11,8 +11,14 @@ import {
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { getCookTimesList } from '../../actions/cookTimes';
 
-const TimeFilter = ({ classes, cookTime, selectedTimes, handleTimeChange }) => {
+const TimeFilter = ({ classes, cookTimes, selectedTimes, handleTimeChange, isLoading, dispatch }) => {
+
+  useEffect(() => {
+    dispatch(getCookTimesList())
+  }, [])
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <FormControl className={classes.formControl}>
@@ -33,8 +39,8 @@ const TimeFilter = ({ classes, cookTime, selectedTimes, handleTimeChange }) => {
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {cookTime &&
-            cookTime.map(time => (
+          {!isLoading &&
+            cookTimes.map(time => (
               <MenuItem key={time.id} value={time.timeOptions}>
                 <Checkbox checked={selectedTimes.indexOf(time.timeOptions) > -1} />
                 <ListItemText primary={time.timeOptions} />
@@ -48,7 +54,9 @@ const TimeFilter = ({ classes, cookTime, selectedTimes, handleTimeChange }) => {
 
 const mapStateToProps = state => {
   return {
-    selectedTimes: state.filter.selectedTimes
+    selectedTimes: state.filter.selectedTimes,
+    isLoading: state.isLoading,
+    cookTimes: state.cookTimes
   }
 }
 
@@ -56,7 +64,9 @@ export default connect(mapStateToProps)(TimeFilter)
 
 TimeFilter.propTypes = {
   classes: PropTypes.object,
-  cookTime: PropTypes.array,
+  cookTimes: PropTypes.array,
   selectedTimes: PropTypes.array,
-  handleTimeChange: PropTypes.func
+  handleTimeChange: PropTypes.func,
+  dispatch: PropTypes.func,
+  isLoading: PropTypes.bool
 }

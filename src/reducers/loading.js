@@ -1,4 +1,8 @@
 import { REQUEST_RECIPES, RECEIVE_RECIPES, SHOW_ERROR } from '../actions/recipesList'
+import { REQUEST_SEASONS, RECEIVE_SEASONS } from '../actions/seasons'
+import { REQUEST_COOKTIMES, RECEIVE_COOKTIMES } from '../actions/cookTimes'
+import { REQUEST_CATEGORIES, RECEIVE_CATEGORIES } from '../actions/categories'
+
 
 const initialState = false
 
@@ -8,6 +12,24 @@ const loading = (state = initialState, action) => {
       return true
 
     case RECEIVE_RECIPES:
+      return false
+
+    case REQUEST_SEASONS:
+      return true
+
+    case RECEIVE_SEASONS:
+      return false
+
+    case REQUEST_COOKTIMES:
+      return true
+
+    case RECEIVE_COOKTIMES:
+      return false
+
+    case REQUEST_CATEGORIES:
+      return true
+
+    case RECEIVE_CATEGORIES:
       return false
 
     case SHOW_ERROR:

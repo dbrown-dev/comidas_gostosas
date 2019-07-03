@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Grid,
   Select,
@@ -11,13 +11,21 @@ import {
 } from '@material-ui/core'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { getCategoriesList } from '../../actions/categories'
 
 const CategoryFilter = ({
   classes,
   categories,
   selectedCategories,
-  handleCategoryChange
+  handleCategoryChange,
+  isLoading,
+  dispatch
 }) => {
+
+  useEffect(() => {
+    dispatch(getCategoriesList())
+  }, [])
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <FormControl className={classes.formControl}>
@@ -38,7 +46,7 @@ const CategoryFilter = ({
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {categories &&
+          {!isLoading &&
             categories.map(category => (
               <MenuItem key={category.id} value={category.categoryName}>
                 <Checkbox
@@ -55,7 +63,9 @@ const CategoryFilter = ({
 
 const mapStateToProps = state => {
   return {
-    selectedCategories: state.filter.selectedCategories
+    selectedCategories: state.filter.selectedCategories,
+    categories: state.categories,
+    isLoading: state.isLoading
   }
 }
 
@@ -65,5 +75,7 @@ CategoryFilter.propTypes = {
   classes: PropTypes.object,
   categories: PropTypes.array,
   selectedCategories: PropTypes.array,
-  handleCategoryChange: PropTypes.func
+  handleCategoryChange: PropTypes.func,
+  isLoading: PropTypes.bool,
+  dispatch: PropTypes.func
 }

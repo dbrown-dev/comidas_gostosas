@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Grid,
   Select,
@@ -11,13 +11,21 @@ import {
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { getSeasonsList } from '../../actions/seasons';
 
 const SeasonFilter = ({
   classes,
   seasons,
   selectedSeasons,
-  handleSeasonChange
+  handleSeasonChange,
+  isLoading,
+  dispatch
 }) => {
+
+  useEffect(() => {
+    dispatch(getSeasonsList())
+  }, [])
+
   return (
     <Grid item xs={12} sm={6} md={4}>
       <FormControl className={classes.formControl}>
@@ -38,7 +46,7 @@ const SeasonFilter = ({
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {seasons &&
+          {!isLoading &&
             seasons.map(season => (
               <MenuItem key={season.id} value={season.season}>
                 <Checkbox checked={selectedSeasons.indexOf(season.season) > -1} />
@@ -53,7 +61,9 @@ const SeasonFilter = ({
 
 const mapStateToProps = state => {
   return {
-    selectedSeasons: state.filter.selectedSeasons
+    selectedSeasons: state.filter.selectedSeasons,
+    seasons: state.seasons,
+    isLoading: state.isLoading
   }
 }
 
@@ -63,5 +73,7 @@ SeasonFilter.propTypes = {
   classes: PropTypes.object,
   seasons: PropTypes.array,
   selectedSeasons: PropTypes.array,
-  handleSeasonChange: PropTypes.func
+  handleSeasonChange: PropTypes.func,
+  dispatch: PropTypes.func,
+  isLoading: PropTypes.bool
 }

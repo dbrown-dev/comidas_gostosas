@@ -1,7 +1,7 @@
 import { getRecipesSummary } from '../utilities/api'
 
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES'
-export const REQUEST_RECIPES = 'IS_LOADING'
+export const REQUEST_RECIPES = 'REQUEST_RECIPES'
 export const SHOW_ERROR = 'IS_ERROR'
 
 export const receiveRecipes = recipes => {

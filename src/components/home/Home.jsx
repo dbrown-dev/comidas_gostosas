@@ -18,7 +18,7 @@ const Home = props => {
         cookTime={cookTime}
         displayFilter={true}
       />
-      {recipes && <ListRecipes classes={classes} />}
+      <ListRecipes classes={classes} />
     </>
   )
 }
