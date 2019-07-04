@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Container, Typography } from '@material-ui/core'
 
-import Filter from './Filter'
+import Filter from './filter/Filter'
 
 const Header = ({ classes, cookTime, onFilterChange, categories, seasons, displayFilter }) => {
   return (

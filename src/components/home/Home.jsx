@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Header from './Header'
+import Header from '../Header'
 import ListRecipes from './ListRecipes'
-import { useStyles } from './util/muiStyles'
+import { useStyles } from '../../style/muiStyles'
 
 
 const Home = props => {
@@ -18,7 +18,7 @@ const Home = props => {
         cookTime={cookTime}
         displayFilter={true}
       />
-      {recipes && <ListRecipes classes={classes} recipes={recipes} />}
+      <ListRecipes classes={classes} />
     </>
   )
 }

@@ -17,7 +17,7 @@ import {
   InputLabel,
   FormControl
 } from '@material-ui/core'
-import Thumb from '../util/Thumb'
+import Thumb from './Thumb'
 import { Debug } from '../util/Debug'
 import FileInput from './FileInput'
 

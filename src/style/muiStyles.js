@@ -1,4 +1,17 @@
 import { makeStyles } from '@material-ui/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#dd2c00'
+    },
+    secondary: {
+      main: '#4a148c'
+    }
+  },
+  spacing: 8
+})
 
 export const useStyles = makeStyles(theme => ({
   photoBanner: {
@@ -22,20 +35,20 @@ export const useStyles = makeStyles(theme => ({
     margin: 10,
     fullWidth: true,
     display: 'flex',
-    wrap: 'nowrap',
+    wrap: 'nowrap'
   },
   recipePhoto: {
     width: 400,
     height: 400,
-    objectFit: "cover",
+    objectFit: 'cover',
     borderRadius: 5
   },
   recipePaper: {
-    padding: "20px 30px",
+    padding: '20px 30px',
     marginBottom: 30
   },
   greyRecipeBox: {
-    backgroundColor: "#F5F4F4",
+    backgroundColor: '#F5F4F4',
     padding: 10
   },
   white: {
@@ -52,5 +65,16 @@ export const useStyles = makeStyles(theme => ({
   },
   cardTitle: {
     minHeight: 80
+  },
+  select: {
+    '&:before': {
+      borderColor: '#FFF'
+    },
+    '&:after': {
+      borderColor: '#FFF'
+    }
+  },
+  icon: {
+    fill: '#FFF'
   }
 }))

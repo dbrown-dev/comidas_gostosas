@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 
 const RecipeDetails = ({ recipe, classes }) => {
+  console.log(recipe, classes)
   return (
     <Container maxWidth={'lg'}>
       <Box mt={3}>
@@ -43,8 +44,8 @@ const RecipeDetails = ({ recipe, classes }) => {
                     return arr.length === i + 1 ? (
                       <span>{category}</span>
                     ) : (
-                      <span>{category}, </span>
-                    )
+                        <span>{category}, </span>
+                      )
                   })}
                 </Typography>
               </Grid>
@@ -71,12 +72,12 @@ const RecipeDetails = ({ recipe, classes }) => {
                           primary={`${ingredient.quantity} ${ingredient.name}`}
                         />
                       ) : (
-                        <ListItemText
-                          primary={`${ingredient.quantity} ${
-                            ingredient.measurementName
-                          } of ${ingredient.name}`}
-                        />
-                      )}
+                          <ListItemText
+                            primary={`${ingredient.quantity} ${
+                              ingredient.measurementName
+                              } of ${ingredient.name}`}
+                          />
+                        )}
                     </ListItem>
                   )
                 })}
@@ -100,6 +101,8 @@ const RecipeDetails = ({ recipe, classes }) => {
     </Container>
   )
 }
+
+
 
 export default RecipeDetails
 

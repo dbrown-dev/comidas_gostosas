@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 
-import Header from './Header'
-import { addValidationSchema } from './util/yup'
-import { useStyles } from './util/muiStyles'
-import AddRecipeForm from './AddRecipeForm/AddRecipeForm'
-import { getCookTimes, getSeasons, getCategories } from './util/api'
+import Header from '../Header'
+import { addValidationSchema } from '../../utilities/yup'
+import { useStyles } from '../../style/muiStyles'
+import AddRecipeForm from './AddRecipeForm'
+import { getCookTimes, getSeasons, getCategories } from '../../utilities/api'
 
 const initialValues = {
   title: '',
