@@ -1,44 +1,42 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Header from '../Header'
-import { getRecipeDetail } from '../../utilities/api'
 import RecipeDetails from './RecipeDetails'
 import { useStyles } from '../../style/muiStyles'
+import { connect } from 'react-redux';
+import { getRecipeDetails } from '../../actions/recipeDetails'
 
 
-const RecipeDisplay = props => {
-  const {
-    match: {
-      params: { id }
-    }
-  } = props
+const RecipeDisplay = (props) => {
+  const { dispatch, isLoading, recipe } = props
 
   const classes = useStyles(props)
-  const [recipe, setRecipe] = useState()
-  const [isError, setIsError] = useState(false)
-
+  const { match: { params: { id } } } = props
+  
   useEffect(() => {
-    const getRecipe = async () => {
-      try {
-        const recipeData = await getRecipeDetail(id)
-        setRecipe(recipeData)
-      } catch {
-        setIsError(true)
-      }
-    }
-    getRecipe()
-  }, [id])
+    dispatch(getRecipeDetails(id))
+  }, [])
 
   return (
     <>
       <Header classes={classes} />
-      {recipe && !isError && <RecipeDetails recipe={recipe} classes={classes} />}
+      {!isLoading && <RecipeDetails recipe={recipe} classes={classes} />}
     </>
   )
 }
 
-export default RecipeDisplay
+const mapStateToProps = state => {
+  return {
+    recipe: state.recipeDetails,
+    isLoading: state.isLoading
+  }
+}
+
+export default connect(mapStateToProps)(RecipeDisplay)
 
 RecipeDisplay.propTypes = {
-  match: PropTypes.object
+  dispatch: PropTypes.func,
+  isLoading: PropTypes.bool,
+  recipe: PropTypes.object,
+
 }

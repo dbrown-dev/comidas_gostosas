@@ -29,7 +29,6 @@ export const getCategoriesList = () => {
     dispatch(requestCategories())
     return getCategories()
       .then(categories => {
-        console.log(categories)
         dispatch(receiveCategories(categories))
       })
       .catch(error => {

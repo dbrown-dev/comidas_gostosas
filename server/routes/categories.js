@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
   modelTranslate
     .formatCategories()
     .then(categories => {
-      console.log(categories)
       res.json(categories)
     })
     .catch(err => {

@@ -34,7 +34,6 @@ export const getSeasons = () => {
 export const getCategories = () => {
   return new Promise((resolve, reject) => {
     request.get(apiUrl + 'categories').end((error, res) => {
-      console.log(res.body)
       error ? reject(error) : resolve(res.body)
     })
   })

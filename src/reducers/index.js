@@ -7,6 +7,7 @@ import filter from './filter'
 import seasons from './seasons'
 import categories from './categories'
 import cookTimes from './cookTimes'
+import recipeDetails from './recipeDetails'
 
 export default combineReducers({
   error,
@@ -15,7 +16,8 @@ export default combineReducers({
   filter,
   seasons,
   categories,
-  cookTimes
+  cookTimes,
+  recipeDetails
 })
 
 // const initialState = {
@@ -26,6 +28,6 @@ export default combineReducers({
 //   seasons: [],
 //   measurements: [],
 //   ingredients: [],
-//   currentRecipe: {},
+//   recipeDetails: {},
 //   filter: { selectedSeasons: [], selectedTimes: [], selectedCategories: [] }
 // }
