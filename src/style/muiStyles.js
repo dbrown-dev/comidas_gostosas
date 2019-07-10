@@ -76,5 +76,16 @@ export const useStyles = makeStyles(theme => ({
   },
   icon: {
     fill: '#FFF'
+  },
+  progress: {
+    position: 'absolute',
+    top: '50%',
+    left: '45%',
+  },
+  textField: {
+    width: 300
+  },
+  textAera: {
+    width: '70%'
   }
 }))

@@ -11,7 +11,7 @@ const initialValues = {
   title: '',
   season: '',
   image: '',
-  cookTimeId: '',
+  timeOptions: '',
   cuisineCategories: [],
   instructions: [
     {

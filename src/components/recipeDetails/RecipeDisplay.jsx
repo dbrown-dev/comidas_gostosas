@@ -3,14 +3,18 @@ import PropTypes from 'prop-types'
 import Header from '../Header'
 import RecipeDetails from './RecipeDetails'
 import { useStyles } from '../../style/muiStyles'
-import { connect } from 'react-redux';
+import { CircularProgress } from '@material-ui/core'
+import { connect } from 'react-redux'
 import { getRecipeDetails } from '../../actions/recipeDetails'
 
-
-const RecipeDisplay = ({ dispatch, isLoading, recipe, ...props }) => {
+const RecipeDisplay = ({ dispatch, recipe, ...props }) => {
   const classes = useStyles(props)
-  const { match: { params: { id } } } = props
-  
+  const {
+    match: {
+      params: { id }
+    }
+  } = props
+
   useEffect(() => {
     dispatch(getRecipeDetails(id))
   }, [dispatch, id])
@@ -18,15 +22,18 @@ const RecipeDisplay = ({ dispatch, isLoading, recipe, ...props }) => {
   return (
     <>
       <Header classes={classes} />
-      {recipe.isLoaded && <RecipeDetails recipe={recipe.data} classes={classes} />}
+      {recipe.isLoaded ? (
+        <RecipeDetails recipe={recipe.data} classes={classes} />
+      ) : (
+        <CircularProgress className={classes.progress} color="secondary" />
+      )}
     </>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    recipe: state.recipeDetails,
-    isLoading: state.isLoading
+    recipe: state.recipeDetails
   }
 }
 
@@ -34,7 +41,6 @@ export default connect(mapStateToProps)(RecipeDisplay)
 
 RecipeDisplay.propTypes = {
   dispatch: PropTypes.func,
-  isLoading: PropTypes.bool,
   recipe: PropTypes.object,
   match: PropTypes.object
 }

@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Formik, Form, Field, FieldArray } from 'formik'
+import TextFieldInput from './TextFieldInput'
+import SelectInput from './SelectInput'
+import MultiSelectInput from './MultiSelectInput'
 import {
   Container,
   Typography,
@@ -51,86 +54,34 @@ const AddRecipeForm = ({
                 alignItems="flex-start"
               >
                 <Grid item lg={7} />
-                <TextField
-                  error={errors.title && touched.title}
-                  label="Title"
+                <Field
                   name="title"
+                  label="Title"
                   className={classes.textField}
-                  value={values.title}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  helperText={errors.title && touched.title && errors.title}
-                  margin="normal"
+                  component={TextFieldInput}
                 />
-                <TextField
-                  select
+                <Field
                   name="season"
                   label="Season"
                   className={classes.textField}
-                  value={values.season}
-                  onChange={handleChange('season')}
-                  SelectProps={{
-                    MenuProps: {
-                      className: classes.menu
-                    }
-                  }}
-                  helperText="Select a season"
-                  margin="normal"
-                >
-                  {seasonList.map(season => (
-                    <MenuItem key={season.id} value={season.id}>
-                      {season.season}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  select
-                  name="cookTimeId"
+                  options={seasonList}
+                  component={SelectInput}
+                />
+                <Field
+                  name="timeOptions"
                   label="Cook Time"
                   className={classes.textField}
-                  value={values.cookTimeId}
-                  onChange={handleChange('cookTimeId')}
-                  SelectProps={{
-                    MenuProps: {
-                      className: classes.menu
-                    }
-                  }}
-                  helperText="Select a cooking time"
-                >
-                  {timeList.map(time => (
-                    <MenuItem key={time.id} value={time.id}>
-                      {time.timeOptions}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <FormControl>
-                  <InputLabel htmlFor="category-select">Category</InputLabel>
-                  <Select
-                    multiple
-                    className={classes.textField}
-                    value={values.cuisineCategories}
-                    onChange={handleChange('cuisineCategories')}
-                    input={<Input id="category-select" />}
-                    renderValue={selected => selected.join(', ')}
-                  >
-                    {categoriesList &&
-                      categoriesList.map(category => (
-                        <MenuItem
-                          key={category.id}
-                          value={category.categoryName}
-                        >
-                          <Checkbox
-                            checked={
-                              values.cuisineCategories.indexOf(
-                                category.categoryName
-                              ) > -1
-                            }
-                          />
-                          <ListItemText primary={category.categoryName} />
-                        </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
+                  options={timeList}
+                  component={SelectInput}
+                />
+                <Field
+                  name="cuisineCategories"
+                  label="Categories"
+                  className={classes.textField}
+                  options={categoriesList}
+                  component={MultiSelectInput}
+                  optionName="categoryName"
+                />
                 <Grid item />
               </Grid>
             </Box>
@@ -157,7 +108,7 @@ const AddRecipeForm = ({
                             rows="4"
                             placeholder="Enter Instruction Text"
                             name={`instructions[${index}].instruction`}
-                            className={classes.textField}
+                            className={classes.textAera}
                             value={values[`instructions[${index}].instruction`]}
                             onChange={handleChange}
                             onBlur={handleBlur}
