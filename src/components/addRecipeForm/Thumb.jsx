@@ -14,7 +14,7 @@ const blobUrl = blob => {
 
 const Thumb = ({ file }) => {
   const url = file && blobUrl(file)
-  return (<img src={url} />)
+  return (<img src={url} alt='' />)
 }
 
 export default Thumb

@@ -10,7 +10,7 @@ const ListRecipes = ({ recipesList, classes, isLoading, dispatch }) => {
   
   useEffect(() => {
     dispatch(getRecipesList())
-  }, [])
+  }, [dispatch])
 
   return (
     <Container maxWidth="md" className={classes.recipeList}>
@@ -35,7 +35,7 @@ export default connect(mapStateToProps)(ListRecipes)
 
 ListRecipes.propTypes = {
   classes: PropTypes.object,
-  recipesList: PropTypes.array,
+  recipesList: PropTypes.object,
   isLoading: PropTypes.bool,
   dispatch: PropTypes.func
 }

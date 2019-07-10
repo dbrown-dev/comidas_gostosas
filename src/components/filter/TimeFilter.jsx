@@ -17,7 +17,7 @@ const TimeFilter = ({ classes, cookTimes, selectedTimes, handleTimeChange, isLoa
 
   useEffect(() => {
     dispatch(getCookTimesList())
-  }, [])
+  }, [dispatch])
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -64,7 +64,7 @@ export default connect(mapStateToProps)(TimeFilter)
 
 TimeFilter.propTypes = {
   classes: PropTypes.object,
-  cookTimes: PropTypes.array,
+  cookTimes: PropTypes.object,
   selectedTimes: PropTypes.array,
   handleTimeChange: PropTypes.func,
   dispatch: PropTypes.func,

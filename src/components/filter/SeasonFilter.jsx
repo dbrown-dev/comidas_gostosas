@@ -24,7 +24,7 @@ const SeasonFilter = ({
 
   useEffect(() => {
     dispatch(getSeasonsList())
-  }, [])
+  }, [dispatch])
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -71,7 +71,7 @@ export default connect(mapStateToProps)(SeasonFilter)
 
 SeasonFilter.propTypes = {
   classes: PropTypes.object,
-  seasons: PropTypes.array,
+  seasons: PropTypes.object,
   selectedSeasons: PropTypes.array,
   handleSeasonChange: PropTypes.func,
   dispatch: PropTypes.func,

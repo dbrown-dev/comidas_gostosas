@@ -1,5 +1,3 @@
-import { getRecipesList } from '../utilities/api'
-
 export const UPDATE_SEASON_FILTER = 'UPDATE_SEASON_FILTER'
 export const UPDATE_TIME_FILTER = 'UPDATE_TIME_FILTER'
 export const UPDATE_CATEGORY_FILTER = 'UPDATE_CATEGORY_FILTER'
@@ -36,5 +34,7 @@ export const updateRecipesList = (name, values) => {
       return setTimeFilter(values)
     case categoryFieldName:
       return setCategoryFilter(values)
+    default:
+      return null
   }
 }

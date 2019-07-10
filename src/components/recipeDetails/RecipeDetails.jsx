@@ -41,15 +41,15 @@ const RecipeDetails = ({ recipe, classes }) => {
                   Cusine Categories:{' '}
                   {recipe.cuisineCategories.map((category, i, arr) => {
                     return arr.length === i + 1 ? (
-                      <span>{category}</span>
+                      <span key={i}>{category}</span>
                     ) : (
-                        <span>{category}, </span>
+                        <span key={i}>{category}, </span>
                       )
                   })}
                 </Typography>
               </Grid>
               <Grid item>
-                <img className={classes.recipePhoto} src={recipe.image} />
+                <img className={classes.recipePhoto} src={recipe.image} alt={recipe.title} />
               </Grid>
             </Grid>
           </Box>

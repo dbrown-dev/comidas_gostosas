@@ -24,7 +24,7 @@ const CategoryFilter = ({
 
   useEffect(() => {
     dispatch(getCategoriesList())
-  }, [])
+  }, [dispatch])
 
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -46,8 +46,7 @@ const CategoryFilter = ({
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {categories.isLoaded &&
-            categories.data.map(category => (
+          {categories.isLoaded && categories.data.map(category => (
               <MenuItem key={category.id} value={category.categoryName}>
                 <Checkbox
                   checked={selectedCategories.indexOf(category.categoryName) > -1}
@@ -73,7 +72,7 @@ export default connect(mapStateToProps)(CategoryFilter)
 
 CategoryFilter.propTypes = {
   classes: PropTypes.object,
-  categories: PropTypes.array,
+  categories: PropTypes.object,
   selectedCategories: PropTypes.array,
   handleCategoryChange: PropTypes.func,
   isLoading: PropTypes.bool,

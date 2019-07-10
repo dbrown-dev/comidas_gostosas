@@ -23,7 +23,7 @@ const Filter = ({
 
   useEffect(() => {
     dispatch(getRecipesList(filter))
-  }, [filter])
+  }, [dispatch, filter])
 
   return (
     <Container maxWidth="md">
@@ -47,7 +47,8 @@ const Filter = ({
 
 const mapStateToProps = state => {
   return {
-    filter: state.filter.data
+    filter: state.filter
+
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
@@ -8,7 +8,7 @@ import RecipeDisplay from './recipeDetails/RecipeDisplay'
 import AddRecipe from './addRecipeForm/AddRecipe'
 import { theme } from '../style/muiStyles'
 
-const App = (props) => {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

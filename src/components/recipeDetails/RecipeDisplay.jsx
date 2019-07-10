@@ -13,7 +13,7 @@ const RecipeDisplay = ({ dispatch, isLoading, recipe, ...props }) => {
   
   useEffect(() => {
     dispatch(getRecipeDetails(id))
-  }, [])
+  }, [dispatch, id])
 
   return (
     <>
