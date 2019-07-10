@@ -5,7 +5,10 @@ const initialState = {}
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_RECIPE:
-      return action.recipe
+      return {
+        isLoaded: true,
+        data: action.recipe
+      }
     default:
       return state
   }

@@ -18,7 +18,7 @@ const RecipeDisplay = ({ dispatch, isLoading, recipe, ...props }) => {
   return (
     <>
       <Header classes={classes} />
-      {!isLoading && <RecipeDetails recipe={recipe} classes={classes} />}
+      {recipe.isLoaded && <RecipeDetails recipe={recipe.data} classes={classes} />}
     </>
   )
 }

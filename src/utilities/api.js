@@ -39,6 +39,22 @@ export const getCategories = () => {
   })
 }
 
+export const getIngredients = () => {
+  return new Promise((resolve, reject) => {
+    request.get(apiUrl + 'ingredients').end((error, res) => {
+      error ? reject(error) : resolve(res.body)
+    })
+  })
+}
+
+export const getMeasurements = () => {
+  return new Promise((resolve, reject) => {
+    request.get(apiUrl + 'measurements').end((error, res) => {
+      error ? reject(error) : resolve(res.body)
+    })
+  })
+}
+
 export const addRecipe = (recipe, callback) => {
   request
     .post(apiUrl)
