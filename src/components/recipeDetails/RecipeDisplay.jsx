@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Header from '../Header'
 import RecipeDetails from './RecipeDetails'
@@ -7,9 +7,7 @@ import { connect } from 'react-redux';
 import { getRecipeDetails } from '../../actions/recipeDetails'
 
 
-const RecipeDisplay = (props) => {
-  const { dispatch, isLoading, recipe } = props
-
+const RecipeDisplay = ({ dispatch, isLoading, recipe, ...props }) => {
   const classes = useStyles(props)
   const { match: { params: { id } } } = props
   
@@ -38,5 +36,5 @@ RecipeDisplay.propTypes = {
   dispatch: PropTypes.func,
   isLoading: PropTypes.bool,
   recipe: PropTypes.object,
-
+  match: PropTypes.object
 }

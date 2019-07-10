@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core'
 
 const RecipeDetails = ({ recipe, classes }) => {
-  console.log(recipe, classes)
   return (
     <Container maxWidth={'lg'}>
       <Box mt={3}>

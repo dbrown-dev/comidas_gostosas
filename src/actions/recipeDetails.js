@@ -25,12 +25,10 @@ export const showError = errorMessage => {
 }
 
 export const getRecipeDetails = id => {
-  console.log('yo')
   return dispatch => {
     dispatch(requestRecipe())
     return getRecipeDetail(id)
       .then(recipeDetails => {
-        console.log(recipeDetails)
           dispatch(receiveRecipe(recipeDetails))
       })
       .catch(error => {
