@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Container, Typography } from '@material-ui/core'
 
 import Filter from './filter/Filter'
 
-const Header = ({ classes, cookTime, onFilterChange, categories, seasons, displayFilter }) => {
+const Header = ({ classes, displayFilter }) => {
   return (
     <>
       <Container maxWidth={false} className={classes.photoBanner}>
@@ -14,10 +14,6 @@ const Header = ({ classes, cookTime, onFilterChange, categories, seasons, displa
         <Toolbar>
           {displayFilter && <Filter
             classes={classes}
-            onFilterChange={onFilterChange}
-            categories={categories}
-            seasons={seasons}
-            cookTime={cookTime}
           />}
         </Toolbar>
       </AppBar>

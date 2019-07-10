@@ -39,8 +39,8 @@ const TimeFilter = ({ classes, cookTimes, selectedTimes, handleTimeChange, isLoa
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {!isLoading &&
-            cookTimes.map(time => (
+          {cookTimes.isLoaded &&
+            cookTimes.data.map(time => (
               <MenuItem key={time.id} value={time.timeOptions}>
                 <Checkbox checked={selectedTimes.indexOf(time.timeOptions) > -1} />
                 <ListItemText primary={time.timeOptions} />

@@ -46,8 +46,8 @@ const SeasonFilter = ({
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {!isLoading &&
-            seasons.map(season => (
+          {seasons.isLoaded &&
+            seasons.data.map(season => (
               <MenuItem key={season.id} value={season.season}>
                 <Checkbox checked={selectedSeasons.indexOf(season.season) > -1} />
                 <ListItemText primary={season.season} />

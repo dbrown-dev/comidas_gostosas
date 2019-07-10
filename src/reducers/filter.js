@@ -5,9 +5,9 @@ import {
 } from '../actions/filter'
 
 const initialState = {
-  selectedSeasons: [],
-  selectedTimes: [],
-  selectedCategories: []
+  selectedSeasons: {},
+  selectedTimes: {},
+  selectedCategories: {}
 }
 
 function filter(state = initialState, action) {
@@ -15,19 +15,28 @@ function filter(state = initialState, action) {
     case UPDATE_SEASON_FILTER:
       return {
         ...state,
-        selectedSeasons: action.seasons
+        selectedSeasons: {
+          isLoaded: true,
+          data: action.seasons
+        }
       }
 
     case UPDATE_TIME_FILTER:
       return {
         ...state,
-        selectedTimes: action.times
+        selectedTimes: {
+          isLoaded: true,
+          data: action.times
+        }
       }
 
     case UPDATE_CATEGORY_FILTER:
       return {
         ...state,
-        selectedCategories: action.categories
+        selectedCategories: {
+          isLoaded: true,
+          data: action.times
+        }
       }
 
     default:

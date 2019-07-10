@@ -2,12 +2,15 @@ import {
   RECEIVE_COOKTIMES
 } from '../actions/cookTimes'
 
-const initialState = []
+const initialState = {}
 
 const cookTimes = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_COOKTIMES:
-      return action.cookTimes
+      return {
+        isLoaded: true,
+        data: action.cookTimes
+      }
     default:
       return state
   }

@@ -46,8 +46,8 @@ const CategoryFilter = ({
           }}
           renderValue={selected => selected.join(', ')}
         >
-          {!isLoading &&
-            categories.map(category => (
+          {categories.isLoaded &&
+            categories.data.map(category => (
               <MenuItem key={category.id} value={category.categoryName}>
                 <Checkbox
                   checked={selectedCategories.indexOf(category.categoryName) > -1}

@@ -1,6 +1,6 @@
 import {SHOW_ERROR} from '../actions/recipesList'
 
-const initialState = ''
+const initialState = {}
 
 function error (state = initialState, action) {
   switch (action.type) {

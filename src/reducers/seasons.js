@@ -2,12 +2,15 @@ import {
   RECEIVE_SEASONS
 } from '../actions/seasons'
 
-const initialState = []
+const initialState = {}
 
 const seasons = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_SEASONS:
-      return action.seasons
+      return {
+        isLoaded: true,
+        data: action.seasons
+      }
     default:
       return state
   }
