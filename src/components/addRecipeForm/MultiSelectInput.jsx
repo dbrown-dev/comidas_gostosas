@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import {
   FormControl,
   MenuItem,
@@ -43,3 +43,11 @@ const MultiSelectInput = ({
 )
 
 export default MultiSelectInput
+
+MultiSelectInput.propTypes = {
+  field: PropTypes.object,
+  form: PropTypes.object,
+  options: PropTypes.array,
+  optionName: PropTypes.string,
+  label: PropTypes.string
+}

@@ -17,9 +17,11 @@ import {
   Input,
   ListItemText,
   Button,
+  IconButton,
   InputLabel,
   FormControl
 } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
 import Thumb from './Thumb'
 import { Debug } from '../util/Debug'
 import FileInput from './FileInput'
@@ -98,42 +100,49 @@ const AddRecipeForm = ({
                     {values.instructions &&
                       values.instructions.length > 0 &&
                       values.instructions.map((instruction, index) => (
-                        <>
-                          <TextField
-                            error={
-                              errors[`instructions[${index}].instruction`] &&
-                              touched[`instructions[${index}].instruction`]
-                            }
-                            multiline
-                            rows="4"
-                            placeholder="Enter Instruction Text"
-                            name={`instructions[${index}].instruction`}
-                            className={classes.textAera}
-                            value={values[`instructions[${index}].instruction`]}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            helperText={
-                              errors[`instructions[${index}].instruction`] &&
-                              touched[`instructions[${index}].instruction`] &&
-                              errors[`instructions[${index}].instruction`]
-                            }
-                            margin="normal"
-                          />
-                          <FileInput
-                            name={`instructions[${index}].image`}
-                            label="Instruction Photo:"
-                            touched={touched}
-                            errors={errors}
-                            setFieldValue={setFieldValue}
-                          />
-                          <Button name="close" onClick={() => remove(index)}>
-                            Delete{' '}
-                          </Button>
-
-                          {values.instructions[index].image && (
-                            <Thumb file={values.instructions[index].image} />
-                          )}
-                        </>
+                        <Paper className={classes.instruction} key={instruction.id}>
+                          <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                            alignItems="flex-start"
+                          >
+                            <Grid item lg={9}>
+                              <Field
+                                name={`instructions[${index}].instruction`}
+                                label="Enter Instruction Text"
+                                multiline
+                                rows="4"
+                                className={classes.textAera}
+                                component={TextFieldInput}
+                              />
+                              <FileInput
+                                name={`instructions[${index}].image`}
+                                label="Instruction Photo:"
+                                touched={touched}
+                                errors={errors}
+                                setFieldValue={setFieldValue}
+                              />
+                            </Grid>
+                            <Grid item lg={1}>
+                              {values.instructions[index].image && (
+                                <Thumb
+                                  className={classes.instructionThumb}
+                                  file={values.instructions[index].image}
+                                />
+                              )}
+                            </Grid>
+                            <Grid justify="flex-end" container lg={1}>
+                              <IconButton
+                                aria-label="Delete"
+                                name="close"
+                                onClick={() => remove(index)}
+                              >
+                                <DeleteIcon fontSize="medium" />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
+                        </Paper>
                       ))}
                     <Button
                       onClick={() => push({ instruction: '', image: '' })}

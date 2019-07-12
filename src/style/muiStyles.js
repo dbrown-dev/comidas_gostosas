@@ -80,12 +80,19 @@ export const useStyles = makeStyles(theme => ({
   progress: {
     position: 'absolute',
     top: '50%',
-    left: '45%',
+    left: '45%'
   },
   textField: {
     width: 300
   },
   textAera: {
-    width: '70%'
+    width: '100%'
+  },
+  instruction: {
+    width: '100%'
+  },
+  instructionThumb: {
+    width: 150,
+    height: 150
   }
 }))

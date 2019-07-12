@@ -12,9 +12,9 @@ const blobUrl = blob => {
   }
 }
 
-const Thumb = ({ file }) => {
+const Thumb = ({ file, ...props }) => {
   const url = file && blobUrl(file)
-  return (<img src={url} alt='' />)
+  return (<img src={url} alt='' {...props}/>)
 }
 
 export default Thumb

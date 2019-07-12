@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import { TextField, MenuItem } from '@material-ui/core'
 
 const SelectInput = ({
@@ -25,3 +25,9 @@ const SelectInput = ({
 )
 
 export default SelectInput
+
+SelectInput.propTypes = {
+  field: PropTypes.object,
+  form: PropTypes.object,
+  options: PropTypes.array
+}
