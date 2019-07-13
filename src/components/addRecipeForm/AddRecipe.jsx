@@ -30,6 +30,7 @@ const initialValues = {
 }
 
 const handleSubmit = values => {
+  console.log(values)
   setTimeout(() => {
     alert(JSON.stringify(values, null, 2))
   }, 500)

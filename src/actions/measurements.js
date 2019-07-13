@@ -7,7 +7,7 @@ export const SHOW_ERROR = 'IS_ERROR'
 export const receiveMeasurements = measurements => {
   return {
     type: RECEIVE_MEASUREMENTS,
-    cookTimes: measurements
+    measurements: measurements
   }
 }
 

@@ -19,7 +19,7 @@ const MultiSelectInput = ({
   ...props
 }) => (
   <FormControl>
-    <InputLabel htmlFor={field.name}>{label}</InputLabel>
+    <InputLabel {...props} htmlFor={field.name}>{label}</InputLabel>
     <Select
       multiple
       input={<Input id={field.name} />}

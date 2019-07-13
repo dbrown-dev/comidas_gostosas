@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Formik, Form, Field, FieldArray } from 'formik'
 import TextFieldInput from './TextFieldInput'
@@ -10,37 +11,39 @@ import {
   Paper,
   Grid,
   Box,
-  TextField,
-  MenuItem,
-  Select,
-  Checkbox,
-  Input,
-  ListItemText,
   Button,
   IconButton,
-  InputLabel,
-  FormControl
+  Divider,
+  Fab
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import AddIcon from '@material-ui/icons/Add';
 import Thumb from './Thumb'
 import { Debug } from '../util/Debug'
 import FileInput from './FileInput'
+import AutoCompleteInput from './AutoCompleteInput'
+import { getIngredientsList } from '../../actions/ingredients'
+import { getMeasurementsList } from '../../actions/measurements'
 
 const AddRecipeForm = ({
   classes,
   values,
   touched,
   errors,
-  isSubmitting,
-  handleChange,
-  handleBlur,
-  handleSubmit,
   setFieldValue,
-  handleReset,
+  isSubmitting,
   seasonList,
   timeList,
-  categoriesList
+  categoriesList,
+  dispatch,
+  ingredients,
+  measurements
 }) => {
+  useEffect(() => {
+    dispatch(getIngredientsList())
+    dispatch(getMeasurementsList())
+  }, [dispatch])
+
   return (
     <Form>
       <Container maxWidth={'lg'}>
@@ -48,59 +51,78 @@ const AddRecipeForm = ({
           <Paper className={classes.recipePaper} elevation={10}>
             <Box mb={3}>
               <Typography>What is the Secret Recipe?</Typography>
-              <Grid
-                container
-                spacing={0}
-                direction="column"
-                justify="space-between"
-                alignItems="flex-start"
-              >
-                <Grid item lg={7} />
-                <Field
-                  name="title"
-                  label="Title"
-                  className={classes.textField}
-                  component={TextFieldInput}
-                />
-                <Field
-                  name="season"
-                  label="Season"
-                  className={classes.textField}
-                  options={seasonList}
-                  component={SelectInput}
-                />
-                <Field
-                  name="timeOptions"
-                  label="Cook Time"
-                  className={classes.textField}
-                  options={timeList}
-                  component={SelectInput}
-                />
-                <Field
-                  name="cuisineCategories"
-                  label="Categories"
-                  className={classes.textField}
-                  options={categoriesList}
-                  component={MultiSelectInput}
-                  optionName="categoryName"
-                />
-                <Grid item />
+              <Grid container>
+                <Grid
+                  container
+                  direction="column"
+                  alignItems="flex-start"
+                  lg={8}
+                >
+                  <Field
+                    name="title"
+                    label="Title"
+                    className={classes.textField}
+                    component={TextFieldInput}
+                  />
+                  <Field
+                    name="season"
+                    label="Season"
+                    className={classes.textField}
+                    options={seasonList}
+                    component={SelectInput}
+                  />
+                  <Field
+                    name="timeOptions"
+                    label="Cook Time"
+                    className={classes.textField}
+                    options={timeList}
+                    component={SelectInput}
+                  />
+                  <Field
+                    name="cuisineCategories"
+                    label="Categories"
+                    className={classes.textField}
+                    options={categoriesList}
+                    component={MultiSelectInput}
+                    optionName="categoryName"
+                  />
+                  <FileInput
+                    name="image"
+                    label="Main Photo:"
+                    touched={touched}
+                    errors={errors}
+                    setFieldValue={setFieldValue}
+                  />
+                </Grid>
+                <Grid lg={4} container>
+                  {values.image && (
+                    <Thumb
+                      className={classes.addRecipePhoto}
+                      file={values.image}
+                    />
+                  )}
+                </Grid>
               </Grid>
             </Box>
             <Grid
               container
-              spacing={0}
-              direction="row"
+              direction="column"
               justify="space-between"
               alignItems="flex-start"
             >
               <FieldArray name="instructions">
                 {({ push, remove }) => (
                   <React.Fragment>
+                    <Typography variant="h5" component="h2">
+                      Instructions:
+                    </Typography>
                     {values.instructions &&
                       values.instructions.length > 0 &&
                       values.instructions.map((instruction, index) => (
-                        <Paper className={classes.instruction} key={instruction.id}>
+                        <Paper
+                          className={classes.instruction}
+                          key={instruction.id}
+                        >
                           <Grid
                             container
                             direction="row"
@@ -112,7 +134,7 @@ const AddRecipeForm = ({
                                 name={`instructions[${index}].instruction`}
                                 label="Enter Instruction Text"
                                 multiline
-                                rows="4"
+                                rows="3"
                                 className={classes.textAera}
                                 component={TextFieldInput}
                               />
@@ -124,7 +146,7 @@ const AddRecipeForm = ({
                                 setFieldValue={setFieldValue}
                               />
                             </Grid>
-                            <Grid item lg={1}>
+                            <Grid alignItems="center" container lg={1}>
                               {values.instructions[index].image && (
                                 <Thumb
                                   className={classes.instructionThumb}
@@ -132,7 +154,7 @@ const AddRecipeForm = ({
                                 />
                               )}
                             </Grid>
-                            <Grid justify="flex-end" container lg={1}>
+                            <Grid justify="flex-end" container xs={1}>
                               <IconButton
                                 aria-label="Delete"
                                 name="close"
@@ -148,11 +170,88 @@ const AddRecipeForm = ({
                       onClick={() => push({ instruction: '', image: '' })}
                       primary
                     >
-                      Add Instruction
+                      Add New Instruction
                     </Button>
                   </React.Fragment>
                 )}
               </FieldArray>
+              <FieldArray name="ingredients">
+                {({ push, remove }) => (
+                  <React.Fragment>
+                    <Divider variant="middle" />
+                    <Typography variant="h5" component="h2">
+                      Ingredients:
+                    </Typography>
+                    {values.ingredients &&
+                      values.ingredients.length > 0 &&
+                      values.ingredients.map((ingredient, index) => (
+                        <Paper
+                          className={classes.instruction}
+                          key={ingredient.id}
+                        >
+                          <Grid
+                            container
+                            direction="row"
+                            justify="space-between"
+                          >
+                            {ingredients.isLoaded && (
+                              <Field
+                                name={`ingredients[${index}].ingredientName`}
+                                label="Ingredient"
+                                placeholder="Search for an Ingredient"
+                                suggestions={ingredients.data}
+                                component={AutoCompleteInput}
+                                propRef="name"
+                              />
+                            )}
+                            <Field
+                              name={`ingredients[${index}].quantity`}
+                              label="Quantity"
+                              component={TextFieldInput}
+                            />
+                            {measurements.isLoaded && (
+                              <Field
+                                name={`ingredients[${index}].measurementName`}
+                                label="Measurement"
+                                suggestions={measurements.data}
+                                component={AutoCompleteInput}
+                                propRef="measurementName"
+                              />
+                            )}
+                            <Field
+                              name={`ingredients[${index}].ingredientGroup`}
+                              label="Ingredient Group"
+                              component={TextFieldInput}
+                            />
+                            <IconButton
+                              aria-label="Delete"
+                              name="close"
+                              onClick={() => remove(index)}
+                            >
+                              <DeleteIcon fontSize="medium" />
+                            </IconButton>
+                          </Grid>
+                        </Paper>
+                      ))}
+                    <Button
+                      onClick={() =>
+                        push({
+                          ingredientName: '',
+                          quantity: '',
+                          ingredientGroup: '',
+                          measurementName: ''
+                        })
+                      }
+                      primary
+                    >
+                      Add Another Instruction
+                    </Button>
+                  </React.Fragment>
+                )}
+              </FieldArray>
+              <Fab color="primary" aria-label="Add" type="submit" disabled={isSubmitting} className={classes.fab}>
+        <AddIcon />
+      </Fab>
             </Grid>
           </Paper>
         </Box>
@@ -162,4 +261,11 @@ const AddRecipeForm = ({
   )
 }
 
-export default AddRecipeForm
+const mapStateToProps = state => {
+  return {
+    measurements: state.measurements,
+    ingredients: state.ingredients
+  }
+}
+
+export default connect(mapStateToProps)(AddRecipeForm)

@@ -83,16 +83,28 @@ export const useStyles = makeStyles(theme => ({
     left: '45%'
   },
   textField: {
-    width: 300
+    width: 300,
+    margin: theme.spacing(1)
   },
   textAera: {
-    width: '100%'
+    width: '95%',
+    margin: theme.spacing(1)
   },
   instruction: {
-    width: '100%'
+    width: '100%',
+    margin: theme.spacing(1)
   },
   instructionThumb: {
     width: 150,
-    height: 150
+    height: 150,
+    objectFit: 'cover',
+    margin: theme.spacing(1.5),
+    borderRadius: 10
+  },
+  addRecipePhoto: {
+    width: 300,
+    height: 300,
+    objectFit: 'cover',
+    borderRadius: 5
   }
 }))
