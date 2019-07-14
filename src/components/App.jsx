@@ -14,7 +14,7 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Switch>
-          {/* <Route
+          <Route
             exact
             path="/"
             render={routeProps => (
@@ -23,7 +23,7 @@ const App = () => {
                 {...routeProps}
               />
             )}
-          /> */}
+          />
           <Route
             exact
             path="/add"

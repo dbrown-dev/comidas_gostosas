@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Formik, Form, Field, FieldArray } from 'formik'
+import { Form, Field, FieldArray } from 'formik'
 import TextFieldInput from './TextFieldInput'
 import SelectInput from './SelectInput'
 import MultiSelectInput from './MultiSelectInput'
@@ -88,13 +88,6 @@ const AddRecipeForm = ({
                     component={MultiSelectInput}
                     optionName="categoryName"
                   />}
-                  {/* {categories.isLoaded && <Field
-                    name="cuisineCategories"
-                    label="Categories"
-                    suggestions={categories.data}
-                    component={AutoCompleteInput}
-                    propRef="categoryName"
-                  />} */}
                   <FileInput
                     name="image"
                     label="Main Photo:"
@@ -285,3 +278,18 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(AddRecipeForm)
+
+AddRecipeForm.propTypes = {
+  classes: PropTypes.object,
+  values: PropTypes.object,
+  touched: PropTypes.object,
+  errors: PropTypes.object,
+  setFieldValue: PropTypes.func,
+  isSubmitting: PropTypes.func,
+  seasonList: PropTypes.array,
+  timeList: PropTypes.array,
+  dispatch: PropTypes.func,
+  ingredients: PropTypes.object,
+  measurements: PropTypes.object,
+  categories: PropTypes.object
+}

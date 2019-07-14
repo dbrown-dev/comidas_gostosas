@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Formik, Form } from 'formik'
+import { Formik } from 'formik'
 
 import Header from '../Header'
 import { addValidationSchema } from '../../utilities/yup'
@@ -8,7 +8,6 @@ import AddRecipeForm from './AddRecipeForm'
 import {
   getCookTimes,
   getSeasons,
-  getCategories,
   postRecipe
 } from '../../utilities/api'
 
@@ -47,7 +46,6 @@ const AddRecipe = props => {
 
   const [seasonList, setSeasonList] = useState()
   const [timeList, setTimeList] = useState()
-  // const [categoriesList, setCategoriesList] = useState()
   const [isError, setIsError] = useState(false)
 
   useEffect(() => {
@@ -73,18 +71,6 @@ const AddRecipe = props => {
     }
     getSeasonOptions()
   }, [])
-
-  // useEffect(() => {
-  //   const getCategoriesOptions = async () => {
-  //     try {
-  //       const categoriesListData = await getCategories()
-  //       setCategoriesList(categoriesListData)
-  //     } catch {
-  //       setIsError(true)
-  //     }
-  //   }
-  //   getCategoriesOptions()
-  // }, [])
 
   return (
     <>
