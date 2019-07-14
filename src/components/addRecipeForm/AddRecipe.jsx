@@ -5,18 +5,23 @@ import Header from '../Header'
 import { addValidationSchema } from '../../utilities/yup'
 import { useStyles } from '../../style/muiStyles'
 import AddRecipeForm from './AddRecipeForm'
-import { getCookTimes, getSeasons, getCategories } from '../../utilities/api'
+import {
+  getCookTimes,
+  getSeasons,
+  getCategories,
+  postRecipe
+} from '../../utilities/api'
 
 const initialValues = {
   title: '',
   season: '',
-  image: '',
+  image: '/images/good.png',
   timeOptions: '',
   cuisineCategories: [],
   instructions: [
     {
       instruction: '',
-      image: null
+      image: '/images/food.png'
     }
   ],
   ingredients: [
@@ -31,17 +36,18 @@ const initialValues = {
 
 const handleSubmit = values => {
   console.log(values)
+  postRecipe(values)
   setTimeout(() => {
     alert(JSON.stringify(values, null, 2))
   }, 500)
 }
 
-const Home = props => {
+const AddRecipe = props => {
   const classes = useStyles(props)
 
   const [seasonList, setSeasonList] = useState()
   const [timeList, setTimeList] = useState()
-  const [categoriesList, setCategoriesList] = useState()
+  // const [categoriesList, setCategoriesList] = useState()
   const [isError, setIsError] = useState(false)
 
   useEffect(() => {
@@ -68,17 +74,17 @@ const Home = props => {
     getSeasonOptions()
   }, [])
 
-  useEffect(() => {
-    const getCategoriesOptions = async () => {
-      try {
-        const categoriesListData = await getCategories()
-        setCategoriesList(categoriesListData)
-      } catch {
-        setIsError(true)
-      }
-    }
-    getCategoriesOptions()
-  }, [])
+  // useEffect(() => {
+  //   const getCategoriesOptions = async () => {
+  //     try {
+  //       const categoriesListData = await getCategories()
+  //       setCategoriesList(categoriesListData)
+  //     } catch {
+  //       setIsError(true)
+  //     }
+  //   }
+  //   getCategoriesOptions()
+  // }, [])
 
   return (
     <>
@@ -88,14 +94,14 @@ const Home = props => {
         validationSchema={addValidationSchema}
         onSubmit={handleSubmit}
       >
-        {seasonList && timeList && categoriesList &&
+        {seasonList &&
+          timeList &&
           (props => (
             <AddRecipeForm
               {...props}
               classes={classes}
               seasonList={seasonList}
               timeList={timeList}
-              categoriesList={categoriesList}
             />
           ))}
       </Formik>
@@ -103,4 +109,4 @@ const Home = props => {
   )
 }
 
-export default Home
+export default AddRecipe

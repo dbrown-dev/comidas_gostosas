@@ -86,6 +86,22 @@ const getMeasurements = (db = database) => {
   return db('measurements').select()
 }
 
+const getIngredientIdByName = (name, db = database) => {
+  return db('ingredients').select().where('name', name).first()
+}
+
+const getMeasurementIdByName = (name, db = database) => {
+  return db('measurements').select().where('measurement_name', name).first()
+}
+
+const insertIngredient = (ingredient, db = database) => {
+  return db('ingredients').insert({name: ingredient})
+}
+
+const insertMeasurement = (measurement, db = database) => {
+  return db('measurements').insert({measurement_name: measurement})
+}
+
 const insertRecipe = (
   recipeSummary,
   cuisineCategories,
@@ -94,7 +110,6 @@ const insertRecipe = (
   db = database
 ) => {
   return db.transaction(trx => {
-    console.log(recipeSummary)
     return db('recipes')
       .insert(recipeSummary)
       .transacting(trx)
@@ -201,9 +216,13 @@ module.exports = {
   getCategories,
   getIngredients,
   getMeasurements,
+  getIngredientIdByName,
+  getMeasurementIdByName,
+  insertMeasurement,
+  insertIngredient,
   close
 }
-// getRecipeIngredient(1).then(data => {
+// getIngredientIdByName('Feta Cheese').then(data => {
 //   console.log(data)
 //   close()
 // }).catch(err => {

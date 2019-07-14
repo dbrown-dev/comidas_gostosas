@@ -17,13 +17,14 @@ import {
   Fab
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/Add'
 import Thumb from './Thumb'
 import { Debug } from '../util/Debug'
 import FileInput from './FileInput'
 import AutoCompleteInput from './AutoCompleteInput'
 import { getIngredientsList } from '../../actions/ingredients'
 import { getMeasurementsList } from '../../actions/measurements'
+import {getCategoriesList} from '../../actions/categories'
 
 const AddRecipeForm = ({
   classes,
@@ -34,14 +35,15 @@ const AddRecipeForm = ({
   isSubmitting,
   seasonList,
   timeList,
-  categoriesList,
   dispatch,
   ingredients,
-  measurements
+  measurements,
+  categories
 }) => {
   useEffect(() => {
     dispatch(getIngredientsList())
     dispatch(getMeasurementsList())
+    dispatch(getCategoriesList())
   }, [dispatch])
 
   return (
@@ -78,14 +80,21 @@ const AddRecipeForm = ({
                     options={timeList}
                     component={SelectInput}
                   />
-                  <Field
+                  {categories.isLoaded && <Field
                     name="cuisineCategories"
                     label="Categories"
                     className={classes.textField}
-                    options={categoriesList}
+                    options={categories.data}
                     component={MultiSelectInput}
                     optionName="categoryName"
-                  />
+                  />}
+                  {/* {categories.isLoaded && <Field
+                    name="cuisineCategories"
+                    label="Categories"
+                    suggestions={categories.data}
+                    component={AutoCompleteInput}
+                    propRef="categoryName"
+                  />} */}
                   <FileInput
                     name="image"
                     label="Main Photo:"
@@ -95,7 +104,7 @@ const AddRecipeForm = ({
                   />
                 </Grid>
                 <Grid lg={4} container>
-                  {values.image && (
+                  {values.image && false && (
                     <Thumb
                       className={classes.addRecipePhoto}
                       file={values.image}
@@ -147,7 +156,7 @@ const AddRecipeForm = ({
                               />
                             </Grid>
                             <Grid alignItems="center" container lg={1}>
-                              {values.instructions[index].image && (
+                              {values.instructions[index].image && false && (
                                 <Thumb
                                   className={classes.instructionThumb}
                                   file={values.instructions[index].image}
@@ -249,9 +258,15 @@ const AddRecipeForm = ({
                   </React.Fragment>
                 )}
               </FieldArray>
-              <Fab color="primary" aria-label="Add" type="submit" disabled={isSubmitting} className={classes.fab}>
-        <AddIcon />
-      </Fab>
+              <Fab
+                color="primary"
+                aria-label="Add"
+                type="submit"
+                className={classes.fab}
+              >
+                {/* disabled={isSubmitting} */}
+                <AddIcon />
+              </Fab>
             </Grid>
           </Paper>
         </Box>
@@ -264,7 +279,8 @@ const AddRecipeForm = ({
 const mapStateToProps = state => {
   return {
     measurements: state.measurements,
-    ingredients: state.ingredients
+    ingredients: state.ingredients,
+    categories: state.categories
   }
 }
 

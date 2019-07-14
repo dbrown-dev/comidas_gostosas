@@ -1,4 +1,6 @@
 const express = require('express')
+const formidable = require('formidable')
+const path = require('path')
 
 const db = require('../db/db')
 const modelTranslate = require('../modelTranslate')
@@ -30,10 +32,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const recipe = req.body
-  modelTranslate.formatInsertRecipe(recipe)
-    .then(id => res.send(`/recipe/${id}`))
+  modelTranslate
+    .formatInsertRecipe(recipe)
+    .then(id => res.send(`/recipe/${id[0]}`))
     .catch(err => {
-      res.status(500).send('DATABASE ERROR: ' + err.message)
+      res.status(500).send('DATABASE ERROR: ' + err)
     })
 })
 

@@ -51,6 +51,35 @@ const formatIngredients = async () => {
   return ingredients.map(ingredient => toCamelCase(ingredient))
 }
 
+const chkIngredientExistsElseCreate = async ingredient => {
+  const result = await db.getIngredientIdByName(ingredient)
+  return result ? result.id : await db.insertIngredient(ingredient)
+}
+
+const chkMeasurementExistsElseCreate = async measurement => {
+  const result = await db.getMeasurementIdByName(measurement)
+  return result ? result.id : await db.insertMeasurement(measurement)
+}
+
+const formatIngredientsForInsert = async ingredients => {
+  return await Promise.all(
+    ingredients.map(async ingredient => {
+      const ingredient_id = await chkIngredientExistsElseCreate(
+        ingredient.ingredientName
+      )
+      const measure_id = await chkMeasurementExistsElseCreate(
+        ingredient.measurementName
+      )
+      return {
+        ingredient_id: ingredient_id[0],
+        quantity: ingredient.quantity,
+        measure_id: measure_id[0],
+        ingredient_group: ingredient.ingredientGroup
+      }
+    })
+  )
+}
+
 const formatRecipeDetails = recipeId => {
   return db
     .getRecipeSummaries(recipeId)
@@ -77,33 +106,33 @@ const formatRecipeDetails = recipeId => {
     })
 }
 
-const formatInsertRecipe = recipe => {
+const formatInsertRecipe = async recipe => {
   const {
     title,
     season,
     image,
-    cookTimeId,
+    timeOptions,
     cuisineCategories,
     instructions,
     ingredients
   } = recipe
 
-  const recipeSummary = toSnakeCase({
+  const recipeSummary = {
     title,
-    season,
+    season_id: season,
     image,
-    cookTimeId
-  })
+    cook_time_id: timeOptions
+  }
 
-  const snakeIngredients = ingredients.map(toSnakeCase)
+  const formattedInstructions = instructions.map(toSnakeCase)
 
-  const snakeInstructions = instructions.map(toSnakeCase)
+  const formattedIngredients = await formatIngredientsForInsert(ingredients)
 
   return db.insertRecipe(
     recipeSummary,
     cuisineCategories,
-    snakeIngredients,
-    snakeInstructions
+    formattedIngredients,
+    formattedInstructions
   )
 }
 
@@ -115,5 +144,7 @@ module.exports = {
   formatSeasons,
   formatCategories,
   formatMeasurements,
-  formatIngredients
+  formatIngredients,
+  chkIngredientExistsElseCreate,
+  chkMeasurementExistsElseCreate
 }

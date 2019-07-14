@@ -131,7 +131,6 @@ const AutoCompleteInput = ({
     getSuggestionValue,
     renderSuggestion
   }
-
   return (
     <Autosuggest
       {...autosuggestProps}

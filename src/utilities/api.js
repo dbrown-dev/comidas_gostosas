@@ -55,11 +55,13 @@ export const getMeasurements = () => {
   })
 }
 
-export const addRecipe = (recipe, callback) => {
-  request
-    .post(apiUrl)
-    .send(recipe)
-    .end((err, res) => {
-      callback(err)
-    })
+export const postRecipe = recipe => {
+  return new Promise((resolve, reject) => {
+    request
+      .post(apiUrl + 'recipes')
+      .send(recipe)
+      .end((error, res) => {
+        error ? reject(error) : resolve(res.body)
+      })
+  })
 }
