@@ -1,9 +1,12 @@
 {
     "env": {
-        "es6": true
+        "es6": true,
+        "node": true,
+        "jest": true
     },
     "extends": [
-        "eslint:recommended", "plugin:react/recommended"
+        "standard",
+        "plugin:react/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -13,12 +16,15 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "ecmaVersion": 2018
     },
     "plugins": [
         "react"
     ],
-    "rules": {
+    "rules": {},
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

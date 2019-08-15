@@ -1,66 +1,94 @@
 {
   "name": "comidas_gostosas",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.1.2",
-    "@material-ui/icons": "^4.2.1",
-    "autosuggest-highlight": "^3.1.1",
-    "express": "^4.17.1",
-    "formidable": "^1.2.1",
-    "knex": "^0.17.6",
-    "lodash": "^4.17.11",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-autosuggest": "^9.4.3",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "react-scripts": "3.0.1",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "sqlite3": "^4.0.9",
-    "superagent": "^5.1.0"
+  "version": "1.0.0",
+  "description": "A recipe management application, I am using this project to develop my skills using React, Redux, Express, SQLite3 and Material-UI .",
+  "main": "server/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "npm run test:server",
-    "test:server": "jest tests/server --watchAll",
-    "eject": "react-scripts eject",
+    "start": "node server",
+    "dev": "run-p dev-*",
+    "dev-server": "nodemon --watch server",
+    "dev-watch": "webpack --watch",
+    "test": "jest --verbose",
     "knex": "knex --knexfile server/db/knexfile.js",
     "db-reset": "run-s db:*",
     "db:delete": "rm -f server/db/dev.sqlite3",
     "db:migrate": "npm run knex migrate:latest",
     "db:seed": "npm run knex seed:run",
-    "server": "node server --exec nodemon | pino-colada",
-    "dev": "run-p server start"
+    "postinstall": "run-s db:migrate db:seed"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/david-brown-dev/comidas_gostosas.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "David Brown",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/david-brown-dev/comidas_gostosas/issues"
   },
+  "homepage": "https://github.com/david-brown-dev/comidas_gostosas#readme",
   "devDependencies": {
-    "body-parser": "^1.19.0",
-    "express-pino-logger": "^4.0.0",
-    "formik": "^1.5.7",
-    "node-env-run": "^3.0.2",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^4.3.2",
+    "@material-ui/icons": "^4.2.1",
+    "autosuggest-highlight": "^3.1.1",
+    "babel-loader": "^8.0.6",
+    "cheerio": "^1.0.0-rc.3",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.1.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-standard": "^4.0.0",
+    "formik": "^1.5.8",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1",
-    "npm-run-all": "^4.1.5",
-    "pino-colada": "^1.4.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-autosuggest": "^9.4.3",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+    "react-test-renderer": "^16.9.0",
+    "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
+    "redux-thunk": "^2.3.0",
+    "sqlite3": "^4.0.9",
+    "style-loader": "^1.0.0",
     "supertest": "^4.0.2",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6",
     "yup": "^0.27.0"
   },
-  "proxy": "http://localhost:3001"
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "dotenv-webpack": "^1.7.0",
+    "express": "^4.17.1",
+    "express-pino-logger": "^4.0.0",
+    "formidable": "^1.2.1",
+    "knex": "^0.19.1",
+    "lodash": "^4.17.15",
+    "node-env-run": "^3.0.2",
+    "npm-run-all": "^4.1.5",
+    "pino-colada": "^1.4.5",
+    "superagent": "^5.1.0"
+  }
 }
