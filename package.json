@@ -8,7 +8,14 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ],
       "@babel/preset-react"
     ],
     "plugins": [
@@ -19,7 +26,7 @@
   "scripts": {
     "start": "node server",
     "dev": "run-p dev-*",
-    "dev-server": "nodemon --watch server",
+    "dev-server": "nodemon --watch server | pino-colada",
     "dev-watch": "webpack --watch",
     "test": "jest --verbose",
     "knex": "knex --knexfile server/db/knexfile.js",
@@ -61,6 +68,7 @@
     "formik": "^1.5.8",
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
+    "pino-colada": "^1.4.5",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-autosuggest": "^9.4.3",
@@ -88,7 +96,6 @@
     "lodash": "^4.17.15",
     "node-env-run": "^3.0.2",
     "npm-run-all": "^4.1.5",
-    "pino-colada": "^1.4.5",
     "superagent": "^5.1.0"
   }
 }
