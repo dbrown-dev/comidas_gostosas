@@ -1,8 +1,8 @@
 import { getMeasurements } from '../utilities/api'
+import { showError } from './'
 
 export const RECEIVE_MEASUREMENTS = 'RECEIVE_MEASUREMENTS'
 export const REQUEST_MEASUREMENTS = 'REQUEST_MEASUREMENTS'
-export const SHOW_ERROR = 'IS_ERROR'
 
 export const receiveMeasurements = measurements => {
   return {
@@ -14,13 +14,6 @@ export const receiveMeasurements = measurements => {
 export const requestMeasurements = () => {
   return {
     type: REQUEST_MEASUREMENTS
-  }
-}
-
-export const showError = errorMessage => {
-  return {
-    type: SHOW_ERROR,
-    errorMessage: errorMessage
   }
 }
 

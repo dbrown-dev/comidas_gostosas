@@ -1,8 +1,8 @@
 import { getRecipesSummary } from '../utilities/api'
+import { showError } from './'
 
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES'
 export const REQUEST_RECIPES = 'REQUEST_RECIPES'
-export const SHOW_ERROR = 'IS_ERROR'
 
 export const receiveRecipes = recipes => {
   return {
@@ -14,13 +14,6 @@ export const receiveRecipes = recipes => {
 export const requestRecipes = () => {
   return {
     type: REQUEST_RECIPES
-  }
-}
-
-export const showError = errorMessage => {
-  return {
-    type: SHOW_ERROR,
-    errorMessage: errorMessage
   }
 }
 
