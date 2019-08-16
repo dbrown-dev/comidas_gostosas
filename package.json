@@ -69,6 +69,7 @@
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "pino-colada": "^1.4.5",
+    "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-autosuggest": "^9.4.3",

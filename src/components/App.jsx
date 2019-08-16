@@ -17,12 +17,7 @@ const App = () => {
           <Route
             exact
             path="/"
-            render={routeProps => (
-              <Home
-                displayFilter={true}
-                {...routeProps}
-              />
-            )}
+            render={routeProps => <Home displayFilter={true} {...routeProps} />}
           />
           <Route
             exact
