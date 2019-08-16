@@ -9,11 +9,35 @@ import {
   Input,
   ListItemText
 } from '@material-ui/core'
-import T from 'prop-types'
+import { withStyles } from '@material-ui/styles'
+import PropTypes from 'prop-types'
+
+const styles = theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    fullWidth: true,
+    display: 'flex',
+    wrap: 'nowrap'
+  },
+  white: {
+    color: '#FFF'
+  },
+  select: {
+    '&:before': {
+      borderColor: '#FFF'
+    },
+    '&:after': {
+      borderColor: '#FFF'
+    }
+  },
+  icon: {
+    fill: '#FFF'
+  }
+})
 
 const MultiSelect = ({
-  classes,
   options,
+  classes,
   selectedOptions,
   handleChange,
   isLoaded,
@@ -55,14 +79,14 @@ const MultiSelect = ({
   )
 }
 
-export default MultiSelect
+export default withStyles(styles)(MultiSelect)
 
 MultiSelect.propTypes = {
-  classes: T.object,
-  options: T.arrayOf(T.object).isRequired,
-  selectedOptions: T.arrayOf(T.string).isRequired,
-  handleChange: T.func.isRequired,
-  isLoaded: T.bool.isRequired,
-  name: T.string.isRequired,
-  label: T.string.isRequired
+  classes: PropTypes.object,
+  options: PropTypes.arrayOf(PropTypes.object),
+  selectedOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  isLoaded: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 }

@@ -66,17 +66,7 @@ export const useStyles = makeStyles(theme => ({
   cardTitle: {
     minHeight: 80
   },
-  select: {
-    '&:before': {
-      borderColor: '#FFF'
-    },
-    '&:after': {
-      borderColor: '#FFF'
-    }
-  },
-  icon: {
-    fill: '#FFF'
-  },
+
   progress: {
     position: 'absolute',
     top: '50%',

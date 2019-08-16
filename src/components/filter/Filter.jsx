@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
-import T from 'prop-types'
+import PropTypes from 'prop-types'
 
 import MultiSelect from './MultiSelect'
 import {
@@ -13,7 +13,6 @@ import {
 } from '../../actions'
 
 const Filter = ({
-  classes,
   filter,
   categories,
   cookTimes,
@@ -41,16 +40,14 @@ const Filter = ({
         <MultiSelect
           name="category"
           label="Categories"
-          classes={classes}
           options={categories.data}
           selectedOptions={filter.selectedCategories}
           isLoaded={categories.isLoaded}
           handleChange={handleFilterChange}
         />
         <MultiSelect
-          name="seasons"
+          name="season"
           label="Seasons"
-          classes={classes}
           options={seasons.data}
           selectedOptions={filter.selectedSeasons}
           isLoaded={seasons.isLoaded}
@@ -59,7 +56,6 @@ const Filter = ({
         <MultiSelect
           name="time"
           label="Time"
-          classes={classes}
           options={cookTimes.data}
           selectedOptions={filter.selectedTimes}
           isLoaded={cookTimes.isLoaded}
@@ -93,23 +89,23 @@ export default connect(
 )(Filter)
 
 Filter.propTypes = {
-  classes: T.object,
-  filter: T.object.isRequired,
-  categories: T.exact({
-    isLoaded: T.bool,
-    data: T.arrayOf(T.object)
+  classes: PropTypes.object,
+  filter: PropTypes.object.isRequired,
+  categories: PropTypes.exact({
+    isLoaded: PropTypes.bool,
+    data: PropTypes.arrayOf(PropTypes.object)
   }).isRequired,
-  cookTimes: T.exact({
-    isLoaded: T.bool,
-    data: T.arrayOf(T.object)
+  cookTimes: PropTypes.exact({
+    isLoaded: PropTypes.bool,
+    data: PropTypes.arrayOf(PropTypes.object)
   }).isRequired,
-  seasons: T.exact({
-    isLoaded: T.bool,
-    data: T.arrayOf(T.object)
+  seasons: PropTypes.exact({
+    isLoaded: PropTypes.bool,
+    data: PropTypes.arrayOf(PropTypes.object)
   }).isRequired,
-  updateRecipesList: T.func.isRequired,
-  getRecipesList: T.func.isRequired,
-  getCookTimesList: T.func.isRequired,
-  getSeasonsList: T.func.isRequired,
-  getCategoriesList: T.func.isRequired
+  updateRecipesList: PropTypes.func.isRequired,
+  getRecipesList: PropTypes.func.isRequired,
+  getCookTimesList: PropTypes.func.isRequired,
+  getSeasonsList: PropTypes.func.isRequired,
+  getCategoriesList: PropTypes.func.isRequired
 }
