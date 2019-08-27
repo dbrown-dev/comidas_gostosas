@@ -1,4 +1,4 @@
-import { getCategories } from '../utilities/api'
+import { makeAPICall } from '../utilities/api'
 import { showError, mapApiDataToOptionsForSelectComponent } from './'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -20,9 +20,9 @@ export const requestCategories = () => {
 export const getCategoriesList = () => {
   return dispatch => {
     dispatch(requestCategories())
-    return getCategories()
-      .then(categories => {
-        dispatch(receiveCategories(categories))
+    return makeAPICall('categories')
+      .then(({ body }) => {
+        dispatch(receiveCategories(body))
       })
       .catch(error => {
         dispatch(showError(error.message))

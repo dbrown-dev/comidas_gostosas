@@ -1,59 +1,14 @@
 import request from 'superagent'
+import { compose } from 'ramda'
 
-const apiUrl = 'http://localhost:3000/api/'
+const apiUrl = t => `http://localhost:3000/api/${t}`
 
-export const getRecipesSummary = () => {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl + 'recipes').end((error, res) => {
-      error ? reject(error) : resolve(res.body)
-    })
-  })
-}
+const getJSON = async url => request.get(url)
 
-export const getRecipeDetail = async recipeId => {
-  const recipe = await request.get(apiUrl + 'recipes/' + recipeId)
-  return recipe.body
-}
-
-export const getCookTimes = () => {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl + 'cooktimes').end((error, res) => {
-      error ? reject(error) : resolve(res.body)
-    })
-  })
-}
-
-export const getSeasons = () => {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl + 'seasons').end((error, res) => {
-      error ? reject(error) : resolve(res.body)
-    })
-  })
-}
-
-export const getCategories = () => {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl + 'categories').end((error, res) => {
-      error ? reject(error) : resolve(res.body)
-    })
-  })
-}
-
-export const getIngredients = () => {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl + 'ingredients').end((error, res) => {
-      error ? reject(error) : resolve(res.body)
-    })
-  })
-}
-
-export const getMeasurements = () => {
-  return new Promise((resolve, reject) => {
-    request.get(apiUrl + 'measurements').end((error, res) => {
-      error ? reject(error) : resolve(res.body)
-    })
-  })
-}
+export const makeAPICall = compose(
+  getJSON,
+  apiUrl
+)
 
 export const postRecipe = recipe => {
   return new Promise((resolve, reject) => {

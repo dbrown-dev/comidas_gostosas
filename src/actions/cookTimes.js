@@ -1,4 +1,4 @@
-import { getCookTimes } from '../utilities/api'
+import { makeAPICall } from '../utilities/api'
 import { showError, mapApiDataToOptionsForSelectComponent } from './'
 
 export const RECEIVE_COOKTIMES = 'RECEIVE_COOKTIMES'
@@ -20,9 +20,9 @@ export const requestCookTimes = () => {
 export const getCookTimesList = () => {
   return dispatch => {
     dispatch(requestCookTimes())
-    return getCookTimes()
-      .then(cookTimes => {
-        dispatch(receiveCookTimes(cookTimes))
+    return makeAPICall('cooktimes')
+      .then(({ body }) => {
+        dispatch(receiveCookTimes(body))
       })
       .catch(error => {
         dispatch(showError(error.message))

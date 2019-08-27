@@ -1,4 +1,4 @@
-import { getMeasurements } from '../utilities/api'
+import { makeAPICall } from '../utilities/api'
 import { showError } from './'
 
 export const RECEIVE_MEASUREMENTS = 'RECEIVE_MEASUREMENTS'
@@ -20,9 +20,9 @@ export const requestMeasurements = () => {
 export const getMeasurementsList = () => {
   return dispatch => {
     dispatch(requestMeasurements())
-    return getMeasurements()
-      .then(measurements => {
-        dispatch(receiveMeasurements(measurements))
+    return makeAPICall('measurements')
+      .then(({ body }) => {
+        dispatch(receiveMeasurements(body))
       })
       .catch(error => {
         dispatch(showError(error.message))

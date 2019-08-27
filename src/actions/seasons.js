@@ -1,4 +1,4 @@
-import { getSeasons } from '../utilities/api'
+import { makeAPICall } from '../utilities/api'
 import { showError, mapApiDataToOptionsForSelectComponent } from './'
 
 export const RECEIVE_SEASONS = 'RECEIVE_SEASONS'
@@ -20,9 +20,9 @@ export const requestSeasons = () => {
 export const getSeasonsList = () => {
   return dispatch => {
     dispatch(requestSeasons())
-    return getSeasons()
-      .then(seasons => {
-        dispatch(receiveSeasons(seasons))
+    return makeAPICall('seasons')
+      .then(({ body }) => {
+        dispatch(receiveSeasons(body))
       })
       .catch(error => {
         dispatch(showError(error.message))

@@ -1,4 +1,4 @@
-import { getRecipesSummary } from '../utilities/api'
+import { makeAPICall } from '../utilities/api'
 import { showError } from './'
 
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES'
@@ -20,10 +20,10 @@ export const requestRecipes = () => {
 export const getRecipesList = filter => {
   return dispatch => {
     dispatch(requestRecipes())
-    return getRecipesSummary()
-      .then(recipesList => {
+    return makeAPICall('recipes')
+      .then(({ body }) => {
         if (filter) {
-          const filteredRecipes = recipesList.filter(
+          const filteredRecipes = body.filter(
             recipe =>
               (filter.selectedSeasons.length === 0 ||
                 filter.selectedSeasons.includes(recipe.season)) &&
@@ -36,7 +36,7 @@ export const getRecipesList = filter => {
           )
           dispatch(receiveRecipes(filteredRecipes))
         } else {
-          dispatch(receiveRecipes(recipesList))
+          dispatch(receiveRecipes(body))
         }
       })
       .catch(error => {

@@ -1,4 +1,4 @@
-import { getRecipeDetail } from '../utilities/api'
+import { makeAPICall } from '../utilities/api'
 import { showError } from './'
 
 export const RECEIVE_RECIPE = 'RECEIVE_RECIPE'
@@ -20,9 +20,9 @@ export const requestRecipe = () => {
 export const getRecipeDetails = id => {
   return dispatch => {
     dispatch(requestRecipe())
-    return getRecipeDetail(id)
-      .then(recipeDetails => {
-        dispatch(receiveRecipe(recipeDetails))
+    return makeAPICall(`recipes/${id}`)
+      .then(({ body }) => {
+        dispatch(receiveRecipe(body))
       })
       .catch(error => {
         dispatch(showError(error.message))
