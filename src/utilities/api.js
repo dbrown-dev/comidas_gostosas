@@ -1,7 +1,7 @@
 import request from 'superagent'
 import { compose } from 'ramda'
 
-const apiUrl = t => `http://localhost:3000/api/${t}`
+const apiUrl = collection => `http://localhost:3000/api/${collection}`
 
 const getJSON = async url => request.get(url)
 
