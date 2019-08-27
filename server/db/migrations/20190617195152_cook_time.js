@@ -1,10 +1,10 @@
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('cook_time', table => {
+  return knex.schema.createTable('cook_times', table => {
     table.increments('id').primary()
-    table.string('time_options')
+    table.string('label')
   })
 }
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('cook_time')
+  return knex.schema.dropTable('cook_times')
 }

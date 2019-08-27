@@ -62,18 +62,18 @@ const chkMeasurementExistsElseCreate = async measurement => {
 }
 
 const formatIngredientsForInsert = async ingredients => {
-  return await Promise.all(
+  return Promise.all(
     ingredients.map(async ingredient => {
-      const ingredient_id = await chkIngredientExistsElseCreate(
+      const ingredientId = await chkIngredientExistsElseCreate(
         ingredient.ingredientName
       )
-      const measure_id = await chkMeasurementExistsElseCreate(
+      const measureId = await chkMeasurementExistsElseCreate(
         ingredient.measurementName
       )
       return {
-        ingredient_id: ingredient_id[0],
+        ingredient_id: ingredientId[0],
         quantity: ingredient.quantity,
-        measure_id: measure_id[0],
+        measure_id: measureId[0],
         ingredient_group: ingredient.ingredientGroup
       }
     })

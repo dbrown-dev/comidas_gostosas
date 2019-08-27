@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
     table.string('season_id').references('seasons.id')
     table.integer('rating').defaultsTo(0)
     table.string('image')
-    table.integer('cook_time_id').references('cook_time.id')
+    table.integer('cook_time_id').references('cook_times.id')
   })
 }
 
