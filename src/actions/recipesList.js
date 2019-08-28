@@ -28,7 +28,7 @@ export const getRecipesList = filter => {
               (filter.selectedSeasons.length === 0 ||
                 filter.selectedSeasons.includes(recipe.season)) &&
               (filter.selectedTimes.length === 0 ||
-                filter.selectedTimes.includes(recipe.timeOptions)) &&
+                filter.selectedTimes.includes(recipe.cookTime)) &&
               (filter.selectedCategories.length === 0 ||
                 filter.selectedCategories.every(category =>
                   recipe.cuisineCategories.includes(category)

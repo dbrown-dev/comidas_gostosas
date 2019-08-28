@@ -1,5 +1,5 @@
 import { makeAPICall } from '../utilities/api'
-import { showError, mapApiDataToOptionsForSelectComponent } from './'
+import { showError } from './'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
@@ -7,7 +7,7 @@ export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES'
 export const receiveCategories = categories => {
   return {
     type: RECEIVE_CATEGORIES,
-    categories: mapApiDataToOptionsForSelectComponent(categories)
+    categories
   }
 }
 

@@ -8,9 +8,6 @@
 # testing
 /coverage
 
-# production
-/public/bundle.js
-
 # misc
 .DS_Store
 .env.local
@@ -23,3 +20,4 @@ yarn-debug.log*
 yarn-error.log*
 server/db/dev.sqlite3
 
+public/bundle.js

@@ -1,5 +1,5 @@
 import { makeAPICall } from '../utilities/api'
-import { showError, mapApiDataToOptionsForSelectComponent } from './'
+import { showError } from './'
 
 export const RECEIVE_COOKTIMES = 'RECEIVE_COOKTIMES'
 export const REQUEST_COOKTIMES = 'REQUEST_COOKTIMES'
@@ -7,7 +7,7 @@ export const REQUEST_COOKTIMES = 'REQUEST_COOKTIMES'
 export const receiveCookTimes = cookTimes => {
   return {
     type: RECEIVE_COOKTIMES,
-    cookTimes: mapApiDataToOptionsForSelectComponent(cookTimes)
+    cookTimes
   }
 }
 

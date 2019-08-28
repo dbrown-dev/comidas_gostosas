@@ -23,42 +23,14 @@ const formatRecipeSummaries = () => {
   })
 }
 
-const formatCookTimes = () => {
-  return db.getCookTimeOptions().then(options => {
-    return options.map(option => toCamelCase(option))
-  })
-}
-
-const formatSeasons = () => {
-  return db.getSeasons().then(seasons => {
-    return seasons.map(season => toCamelCase(season))
-  })
-}
-
-const formatCategories = () => {
-  return db.getCategories().then(categories => {
-    return categories.map(category => toCamelCase(category))
-  })
-}
-
-const formatMeasurements = async () => {
-  const measurements = await db.getMeasurements()
-  return measurements.map(measurement => toCamelCase(measurement))
-}
-
-const formatIngredients = async () => {
-  const ingredients = await db.getIngredients()
-  return ingredients.map(ingredient => toCamelCase(ingredient))
-}
-
 const chkIngredientExistsElseCreate = async ingredient => {
   const result = await db.getIngredientIdByName(ingredient)
-  return result ? result.id : await db.insertIngredient(ingredient)
+  return result ? result.id : db.insertIngredient(ingredient)
 }
 
 const chkMeasurementExistsElseCreate = async measurement => {
   const result = await db.getMeasurementIdByName(measurement)
-  return result ? result.id : await db.insertMeasurement(measurement)
+  return result ? result.id : db.insertMeasurement(measurement)
 }
 
 const formatIngredientsForInsert = async ingredients => {
@@ -140,11 +112,6 @@ module.exports = {
   formatRecipeDetails,
   formatRecipeSummaries,
   formatInsertRecipe,
-  formatCookTimes,
-  formatSeasons,
-  formatCategories,
-  formatMeasurements,
-  formatIngredients,
   chkIngredientExistsElseCreate,
   chkMeasurementExistsElseCreate
 }

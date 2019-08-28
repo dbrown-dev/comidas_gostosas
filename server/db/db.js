@@ -1,9 +1,14 @@
+const { curry } = require('ramda')
 const config = require('./knexfile').development
 const database = require('knex')(config)
 
+const selectTable = curry(async (db, tableName) => db(tableName))
+
+const selectTableProd = selectTable(database)
+
 const getRecipeSummaries = (id, db = database) => {
   return db('recipes')
-    .join('cook_time', 'recipes.cook_time_id', 'cook_time.id')
+    .join('cook_times', 'recipes.cook_time_id', 'cook_times.id')
     .join('seasons', 'recipes.season_id', 'seasons.id')
     .join(
       'cuisine_categories_recipes',
@@ -18,12 +23,12 @@ const getRecipeSummaries = (id, db = database) => {
     .select(
       'recipes.id',
       'recipes.title',
-      'seasons.season',
+      'seasons.label as season',
       'recipes.rating',
       'recipes.image',
-      'cook_time.time_options',
+      'cook_times.label as cookTime',
       db.raw(
-        'GROUP_CONCAT(cuisine_categories.category_name, "@") cuisine_categories'
+        'GROUP_CONCAT(cuisine_categories.label, "@") cuisine_categories'
       )
     )
     .orderBy('recipes.id')
@@ -53,53 +58,38 @@ const getRecipeIngredients = (id, db = database) => {
       'ingredients.id'
     )
     .join('recipes', 'ingredients_recipes.recipe_id', 'recipes.id')
-    .join('measurements', 'measurements.id', 'ingredients_recipes.measure_id')
+    .join('measurements', 'measurements.id', 'ingredients_recipes.measurement_id')
     .select(
       'ingredients.id',
-      'ingredients.name',
+      'ingredients.label',
       'ingredients_recipes.quantity',
       'ingredients_recipes.ingredient_group',
-      'measurements.measurement_name'
+      'measurements.label'
     )
     .orderBy('ingredients.id')
     .where('recipes.id', id)
-
 }
 
-const getCookTimeOptions = (db = database) => {
-  return db('cook_time').select()
+const getIngredientIdByName = (label, db = database) => {
+  return db('ingredients')
+    .select()
+    .where('label', label)
+    .first()
 }
 
-const getSeasons = (db = database) => {
-  return db('seasons').select()
-}
-
-const getCategories = (db = database) => {
-  return db('cuisine_categories').select()
-}
-
-const getIngredients = (db = database) => {
-  return db('ingredients').select()
-}
-
-const getMeasurements = (db = database) => {
-  return db('measurements').select()
-}
-
-const getIngredientIdByName = (name, db = database) => {
-  return db('ingredients').select().where('name', name).first()
-}
-
-const getMeasurementIdByName = (name, db = database) => {
-  return db('measurements').select().where('measurement_name', name).first()
+const getMeasurementIdByName = (label, db = database) => {
+  return db('measurements')
+    .select()
+    .where('label', label)
+    .first()
 }
 
 const insertIngredient = (ingredient, db = database) => {
-  return db('ingredients').insert({name: ingredient})
+  return db('ingredients').insert({ label: ingredient })
 }
 
 const insertMeasurement = (measurement, db = database) => {
-  return db('measurements').insert({measurement_name: measurement})
+  return db('measurements').insert({ label: measurement })
 }
 
 const insertRecipe = (
@@ -209,23 +199,12 @@ module.exports = {
   getRecipeSummaries,
   getRecipeInstructions,
   getRecipeIngredients,
-  getCookTimeOptions,
   insertRecipe,
   updateRecipeById,
-  getSeasons,
-  getCategories,
-  getIngredients,
-  getMeasurements,
   getIngredientIdByName,
   getMeasurementIdByName,
   insertMeasurement,
   insertIngredient,
-  close
+  close,
+  selectTableProd
 }
-// getIngredientIdByName('Feta Cheese').then(data => {
-//   console.log(data)
-//   close()
-// }).catch(err => {
-//   console.log(err.message)
-//   close()
-// })

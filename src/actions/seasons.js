@@ -1,5 +1,5 @@
 import { makeAPICall } from '../utilities/api'
-import { showError, mapApiDataToOptionsForSelectComponent } from './'
+import { showError } from './'
 
 export const RECEIVE_SEASONS = 'RECEIVE_SEASONS'
 export const REQUEST_SEASONS = 'REQUEST_SEASONS'
@@ -7,7 +7,7 @@ export const REQUEST_SEASONS = 'REQUEST_SEASONS'
 export const receiveSeasons = seasons => {
   return {
     type: RECEIVE_SEASONS,
-    seasons: mapApiDataToOptionsForSelectComponent(seasons)
+    seasons
   }
 }
 
