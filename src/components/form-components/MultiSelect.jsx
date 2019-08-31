@@ -14,24 +14,24 @@ import PropTypes from 'prop-types'
 
 const styles = theme => ({
   formControl: {
-    margin: theme.spacing(1),
-    fullWidth: true,
+    margin: theme.spacing(3),
+    width: 250,
     display: 'flex',
     wrap: 'nowrap'
   },
   label: {
-    color: theme.palette.secondary.main
+    color: theme.palette.primary.main
   },
   select: {
     '&:before': {
-      borderColor: theme.palette.secondary.main
+      borderColor: theme.palette.primary.main
     },
     '&:after': {
-      borderColor: theme.palette.secondary.main
+      borderColor: theme.palette.primary.main
     }
   },
   icon: {
-    fill: theme.palette.secondary.main
+    fill: theme.palette.primary.main
   }
 })
 

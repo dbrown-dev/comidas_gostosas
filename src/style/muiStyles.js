@@ -10,7 +10,10 @@ export const theme = createMuiTheme({
       main: '#FFDF59'
     }
   },
-  spacing: 8
+  spacing: 8,
+  typography: {
+    fontSize: 16
+  }
 })
 
 export const useStyles = makeStyles(theme => ({

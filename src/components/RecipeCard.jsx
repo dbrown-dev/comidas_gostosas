@@ -52,11 +52,11 @@ const RecipeCard = ({ recipe, classes }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="secondary">
+        <Button size="small" color="primary">
           Share
         </Button>
         <Link to={`/${recipe.id}`}>
-          <Button size="small" color="secondary">
+          <Button size="small" color="primary">
             Details
           </Button>
         </Link>

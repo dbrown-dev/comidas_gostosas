@@ -1,21 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { AppBar, Toolbar } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
-import Filter from './Filter'
+const styles = () => ({
+  siteTitle: {
+    fontSize: 20,
+    fontWeight: 700
+  }
+})
 
-const Header = ({ displayFilter }) => {
+const Header = ({ classes }) => {
   return (
     <>
       <AppBar position="static">
-        <Toolbar>{displayFilter && <Filter />}</Toolbar>
+        <Toolbar>
+          <Typography className={classes.siteTitle} color="secondary">
+            Comidas Gostosas
+          </Typography>
+        </Toolbar>
       </AppBar>
     </>
   )
 }
 
-export default Header
+export default withStyles(styles)(Header)
 
 Header.propTypes = {
-  displayFilter: PropTypes.bool
+  classes: PropTypes.shape({ siteTitle: PropTypes.string })
 }

@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/styles'
 
 import RecipeCard from './RecipeCard'
 import { getRecipesList } from '../actions/recipesList'
+import Filter from './Filter'
 
 const styles = theme => ({
   recipeList: {
@@ -20,16 +21,19 @@ const RecipeList = ({ recipesList, classes, dispatch }) => {
   }, [dispatch])
 
   return (
-    <Container maxWidth="md" className={classes.recipeList}>
-      <Grid container spacing={6}>
-        {recipesList.isLoaded &&
-          recipesList.data.map(recipe => (
-            <Grid item key={recipe.id} xs={12} sm={6} md={4}>
-              <RecipeCard recipe={recipe} />
-            </Grid>
-          ))}
-      </Grid>
-    </Container>
+    <>
+      <Filter />
+      <Container maxWidth="md" className={classes.recipeList}>
+        <Grid container spacing={6}>
+          {recipesList.isLoaded &&
+            recipesList.data.map(recipe => (
+              <Grid item key={recipe.id} xs={12} sm={6} md={4}>
+                <RecipeCard recipe={recipe} />
+              </Grid>
+            ))}
+        </Grid>
+      </Container>
+    </>
   )
 }
 
