@@ -2,9 +2,13 @@ const { curry } = require('ramda')
 const config = require('./knexfile').development
 const database = require('knex')(config)
 
+// Functional
+
 const selectTable = curry(async (db, tableName) => db(tableName))
 
 const selectTableProd = selectTable(database)
+
+// Imperative
 
 const getRecipeSummaries = (id, db = database) => {
   return db('recipes')

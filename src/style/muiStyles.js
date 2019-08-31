@@ -4,10 +4,10 @@ import { createMuiTheme } from '@material-ui/core/styles'
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#dd2c00'
+      main: '#2a2e36'
     },
     secondary: {
-      main: '#4a148c'
+      main: '#FFDF59'
     }
   },
   spacing: 8
@@ -54,19 +54,6 @@ export const useStyles = makeStyles(theme => ({
   white: {
     color: '#FFF'
   },
-  recipeList: {
-    marginTop: 40
-  },
-  recipeCard: {
-    maxWidth: 345
-  },
-  cardMedia: {
-    height: 140
-  },
-  cardTitle: {
-    minHeight: 80
-  },
-
   progress: {
     position: 'absolute',
     top: '50%',

@@ -3,34 +3,32 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import { connect } from 'react-redux'
-import Home from './home/Home'
+import RecipeList from './recipeList/RecipeList'
 import RecipeDisplay from './recipeDetails/RecipeDisplay'
 import AddRecipe from './addRecipeForm/AddRecipe'
 import { theme } from '../style/muiStyles'
+import Header from './Header'
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Header displayFilter={true} />
         <Switch>
           <Route
             exact
             path="/"
-            render={routeProps => <Home displayFilter={true} {...routeProps} />}
+            render={routeProps => <RecipeList {...routeProps} />}
           />
           <Route
             exact
             path="/add"
-            render={routeProps => (
-              <AddRecipe displayFilter={false} {...routeProps} />
-            )}
+            render={routeProps => <AddRecipe {...routeProps} />}
           />
           <Route
             path="/:id"
-            render={routeProps => (
-              <RecipeDisplay displayFilter={false} {...routeProps} />
-            )}
+            render={routeProps => <RecipeDisplay {...routeProps} />}
           />
           {/* <Route component={Error404} /> */}
         </Switch>

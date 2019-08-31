@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Header from '../Header'
 import RecipeDetails from './RecipeDetails'
 import { useStyles } from '../../style/muiStyles'
 import { CircularProgress } from '@material-ui/core'
@@ -21,7 +20,6 @@ const RecipeDisplay = ({ dispatch, recipe, ...props }) => {
 
   return (
     <>
-      <Header classes={classes} />
       {recipe.isLoaded ? (
         <RecipeDetails recipe={recipe.data} classes={classes} />
       ) : (

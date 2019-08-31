@@ -1,21 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Container, Typography } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import { AppBar, Toolbar } from '@material-ui/core'
 
 import Filter from './filter/Filter'
 
-const Header = ({ classes, displayFilter }) => {
+const Header = ({ displayFilter }) => {
   return (
     <>
-      <Container maxWidth={false} className={classes.photoBanner}>
-        <Typography className={classes.appTitle}>Comida Gostosa</Typography>
-      </Container>
       <AppBar position="static">
-        <Toolbar>
-          {displayFilter && <Filter
-            classes={classes}
-          />}
-        </Toolbar>
+        <Toolbar>{displayFilter && <Filter />}</Toolbar>
       </AppBar>
     </>
   )
@@ -24,10 +17,5 @@ const Header = ({ classes, displayFilter }) => {
 export default Header
 
 Header.propTypes = {
-  classes: PropTypes.object,
-  cookTime: PropTypes.array, 
-  onFilterChange: PropTypes.func,
-  categories: PropTypes.array,
-  seasons: PropTypes.array,
   displayFilter: PropTypes.bool
 }
