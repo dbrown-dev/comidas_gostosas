@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { AppBar, Toolbar } from '@material-ui/core'
 
-import Filter from './filter/Filter'
+import Filter from './Filter'
 
 const Header = ({ displayFilter }) => {
   return (

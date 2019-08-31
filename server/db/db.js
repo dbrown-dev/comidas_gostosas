@@ -65,10 +65,10 @@ const getRecipeIngredients = (id, db = database) => {
     .join('measurements', 'measurements.id', 'ingredients_recipes.measurement_id')
     .select(
       'ingredients.id',
-      'ingredients.label',
+      'ingredients.label as ingredient',
       'ingredients_recipes.quantity',
       'ingredients_recipes.ingredient_group',
-      'measurements.label'
+      'measurements.label as measurement'
     )
     .orderBy('ingredients.id')
     .where('recipes.id', id)
