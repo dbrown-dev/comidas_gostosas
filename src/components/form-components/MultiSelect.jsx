@@ -19,19 +19,19 @@ const styles = theme => ({
     display: 'flex',
     wrap: 'nowrap'
   },
-  white: {
-    color: '#FFF'
+  label: {
+    color: theme.palette.secondary.main
   },
   select: {
     '&:before': {
-      borderColor: '#FFF'
+      borderColor: theme.palette.secondary.main
     },
     '&:after': {
-      borderColor: '#FFF'
+      borderColor: theme.palette.secondary.main
     }
   },
   icon: {
-    fill: '#FFF'
+    fill: theme.palette.secondary.main
   }
 })
 
@@ -47,7 +47,7 @@ const MultiSelect = ({
   return (
     <Grid item xs={12} sm={6} md={4}>
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor={`multi-select-${name}`} className={classes.white}>
+        <InputLabel htmlFor={`multi-select-${name}`} className={classes.label}>
           {label}
         </InputLabel>
         <Select
