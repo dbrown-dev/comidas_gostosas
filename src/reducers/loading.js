@@ -1,11 +1,20 @@
-import { REQUEST_RECIPES, RECEIVE_RECIPES, SHOW_ERROR } from '../actions/recipesList'
-import { REQUEST_RECIPE, RECEIVE_RECIPE } from '../actions/recipeDetails'
-import { REQUEST_SEASONS, RECEIVE_SEASONS } from '../actions/seasons'
-import { REQUEST_COOKTIMES, RECEIVE_COOKTIMES } from '../actions/cookTimes'
-import { REQUEST_CATEGORIES, RECEIVE_CATEGORIES } from '../actions/categories'
-import { REQUEST_INGREDIENTS, RECEIVE_INGREDIENTS } from '../actions/ingredients'
-import { REQUEST_MEASUREMENTS, RECEIVE_MEASUREMENTS } from '../actions/measurements'
-
+import {
+  REQUEST_RECIPES,
+  RECEIVE_RECIPES,
+  REQUEST_RECIPE,
+  RECEIVE_RECIPE,
+  REQUEST_SEASONS,
+  RECEIVE_SEASONS,
+  REQUEST_COOKTIMES,
+  RECEIVE_COOKTIMES,
+  REQUEST_CATEGORIES,
+  RECEIVE_CATEGORIES,
+  REQUEST_MEASUREMENTS,
+  RECEIVE_MEASUREMENTS,
+  REQUEST_INGREDIENTS,
+  RECEIVE_INGREDIENTS,
+  SHOW_ERROR
+} from '../actions'
 
 const initialState = true
 

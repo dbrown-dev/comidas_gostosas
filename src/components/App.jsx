@@ -8,14 +8,31 @@ import Recipe from './Recipe'
 import AddRecipe from './addRecipeForm/AddRecipe'
 import { theme } from '../style/muiStyles'
 import Header from './Header'
+import AutoSelect from './form-components/AutoSelect'
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Header displayFilter={true} />
+        {/* <Header displayFilter={true} /> */}
         <Switch>
+          <Route
+            exact
+            path="/test"
+            render={routeProps => (
+              <div style={{
+                width: 300
+              }}>
+                <AutoSelect
+                  isMulti
+                  name="test"
+                  label="test"
+                  placeholder="Chose a Dog"
+                />
+              </div>
+            )}
+          />
           <Route
             exact
             path="/"

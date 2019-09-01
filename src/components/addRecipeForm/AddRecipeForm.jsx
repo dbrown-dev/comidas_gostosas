@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { compose } from 'ramda'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Form, Field, FieldArray } from 'formik'
+import { withStyles } from '@material-ui/styles'
 import TextFieldInput from './TextFieldInput'
 import SelectInput from './SelectInput'
 import MultiSelectInput from './MultiSelectInput'
@@ -22,9 +24,39 @@ import Thumb from './Thumb'
 import { Debug } from '../util/Debug'
 import FileInput from './FileInput'
 import AutoCompleteInput from './AutoCompleteInput'
-import { getIngredientsList } from '../../actions/ingredients'
-import { getMeasurementsList } from '../../actions/measurements'
-import {getCategoriesList} from '../../actions/categories'
+
+const styles = theme => ({
+  formControl: {
+    margin: 10,
+    fullWidth: true,
+    display: 'flex',
+    wrap: 'nowrap'
+  },
+  white: {
+    color: '#FFF'
+  },
+  textAera: {
+    width: '95%',
+    margin: theme.spacing(1)
+  },
+  instruction: {
+    width: '100%',
+    margin: theme.spacing(1)
+  },
+  instructionThumb: {
+    width: 150,
+    height: 150,
+    objectFit: 'cover',
+    margin: theme.spacing(1.5),
+    borderRadius: 10
+  },
+  addRecipePhoto: {
+    width: 300,
+    height: 300,
+    objectFit: 'cover',
+    borderRadius: 5
+  }
+})
 
 const AddRecipeForm = ({
   classes,
@@ -33,26 +65,19 @@ const AddRecipeForm = ({
   errors,
   setFieldValue,
   isSubmitting,
-  seasonList,
-  timeList,
-  dispatch,
   ingredients,
   measurements,
-  categories
+  categories,
+  seasons,
+  cookTimes
 }) => {
-  useEffect(() => {
-    dispatch(getIngredientsList())
-    dispatch(getMeasurementsList())
-    dispatch(getCategoriesList())
-  }, [dispatch])
-
   return (
     <Form>
       <Container maxWidth={'lg'}>
         <Box mt={3}>
           <Paper className={classes.recipePaper} elevation={10}>
             <Box mb={3}>
-              <Typography>What is the Secret Recipe?</Typography>
+              <Typography>What&apos;s the Secret Recipe?</Typography>
               <Grid container>
                 <Grid
                   container
@@ -63,31 +88,32 @@ const AddRecipeForm = ({
                   <Field
                     name="title"
                     label="Title"
-                    className={classes.textField}
                     component={TextFieldInput}
                   />
                   <Field
                     name="season"
                     label="Season"
                     className={classes.textField}
-                    options={seasonList}
+                    options={seasons.data}
                     component={SelectInput}
                   />
                   <Field
                     name="timeOptions"
                     label="Cook Time"
                     className={classes.textField}
-                    options={timeList}
+                    options={cookTimes.data}
                     component={SelectInput}
                   />
-                  {categories.isLoaded && <Field
-                    name="cuisineCategories"
-                    label="Categories"
-                    className={classes.textField}
-                    options={categories.data}
-                    component={MultiSelectInput}
-                    optionName="categoryName"
-                  />}
+                  {categories.isLoaded && (
+                    <Field
+                      name="cuisineCategories"
+                      label="Categories"
+                      className={classes.textField}
+                      options={categories.data}
+                      component={MultiSelectInput}
+                      optionName="categoryName"
+                    />
+                  )}
                   <FileInput
                     name="image"
                     label="Main Photo:"
@@ -162,7 +188,7 @@ const AddRecipeForm = ({
                                 name="close"
                                 onClick={() => remove(index)}
                               >
-                                <DeleteIcon fontSize="medium" />
+                                <DeleteIcon />
                               </IconButton>
                             </Grid>
                           </Grid>
@@ -170,7 +196,6 @@ const AddRecipeForm = ({
                       ))}
                     <Button
                       onClick={() => push({ instruction: '', image: '' })}
-                      primary
                     >
                       Add New Instruction
                     </Button>
@@ -198,12 +223,12 @@ const AddRecipeForm = ({
                           >
                             {ingredients.isLoaded && (
                               <Field
-                                name={`ingredients[${index}].ingredientName`}
+                                name={`ingredients[${index}].ingredient`}
                                 label="Ingredient"
                                 placeholder="Search for an Ingredient"
                                 suggestions={ingredients.data}
                                 component={AutoCompleteInput}
-                                propRef="name"
+                                propRef="label"
                               />
                             )}
                             <Field
@@ -213,11 +238,11 @@ const AddRecipeForm = ({
                             />
                             {measurements.isLoaded && (
                               <Field
-                                name={`ingredients[${index}].measurementName`}
+                                name={`ingredients[${index}].measurement`}
                                 label="Measurement"
                                 suggestions={measurements.data}
                                 component={AutoCompleteInput}
-                                propRef="measurementName"
+                                propRef="label"
                               />
                             )}
                             <Field
@@ -230,7 +255,7 @@ const AddRecipeForm = ({
                               name="close"
                               onClick={() => remove(index)}
                             >
-                              <DeleteIcon fontSize="medium" />
+                              <DeleteIcon />
                             </IconButton>
                           </Grid>
                         </Paper>
@@ -238,13 +263,12 @@ const AddRecipeForm = ({
                     <Button
                       onClick={() =>
                         push({
-                          ingredientName: '',
+                          ingredient: '',
                           quantity: '',
                           ingredientGroup: '',
-                          measurementName: ''
+                          measurement: ''
                         })
                       }
-                      primary
                     >
                       Add Another Instruction
                     </Button>
@@ -269,15 +293,26 @@ const AddRecipeForm = ({
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({
+  measurements,
+  ingredients,
+  categories,
+  cookTimes,
+  seasons
+}) => {
   return {
-    measurements: state.measurements,
-    ingredients: state.ingredients,
-    categories: state.categories
+    measurements,
+    ingredients,
+    categories,
+    cookTimes,
+    seasons
   }
 }
 
-export default connect(mapStateToProps)(AddRecipeForm)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(AddRecipeForm)
 
 AddRecipeForm.propTypes = {
   classes: PropTypes.object,

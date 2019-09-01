@@ -1,8 +1,8 @@
-import {SHOW_ERROR} from '../actions/recipesList'
+import { SHOW_ERROR } from '../actions'
 
 const initialState = {}
 
-function error (state = initialState, action) {
+const error = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_ERROR:
       return {

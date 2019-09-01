@@ -7,7 +7,7 @@ export const REQUEST_INGREDIENTS = 'REQUEST_INGREDIENTS'
 export const receiveIngredients = ingredients => {
   return {
     type: RECEIVE_INGREDIENTS,
-    ingredients: ingredients
+    ingredients
   }
 }
 

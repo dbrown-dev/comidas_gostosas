@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 
-import Header from '../Header'
 import { addValidationSchema } from '../../utilities/yup'
-import { useStyles } from '../../style/muiStyles'
-import AddRecipeForm from './AddRecipeForm'
 import {
-  getCookTimes,
-  getSeasons,
-  postRecipe
-} from '../../utilities/api'
+  getCookTimesList,
+  getSeasonsList,
+  getCategoriesList,
+  getIngredientsList,
+  getMeasurementsList
+} from '../../actions'
+import AddRecipeForm from './AddRecipeForm'
+import { postRecipe } from '../../utilities/api'
+import Loading from '../Loading'
 
 const initialValues = {
   title: '',
   season: '',
   image: '/images/good.png',
-  timeOptions: '',
+  cookTime: '',
   cuisineCategories: [],
   instructions: [
     {
@@ -25,10 +29,10 @@ const initialValues = {
   ],
   ingredients: [
     {
-      ingredientName: '',
+      ingredient: '',
       quantity: '',
       ingredientGroup: '',
-      measurementName: ''
+      measurement: ''
     }
   ]
 }
@@ -41,58 +45,48 @@ const handleSubmit = values => {
   }, 500)
 }
 
-const AddRecipe = props => {
-  const classes = useStyles(props)
-
-  const [seasonList, setSeasonList] = useState()
-  const [timeList, setTimeList] = useState()
-  const [isError, setIsError] = useState(false)
-
+const AddRecipe = ({ dispatch, isLoaded }) => {
   useEffect(() => {
-    const getTimeOptions = async () => {
-      try {
-        const timeListData = await getCookTimes()
-        setTimeList(timeListData)
-      } catch {
-        setIsError(true)
-      }
-    }
-    getTimeOptions()
-  }, [])
-
-  useEffect(() => {
-    const getSeasonOptions = async () => {
-      try {
-        const seasonListData = await getSeasons()
-        setSeasonList(seasonListData)
-      } catch {
-        setIsError(true)
-      }
-    }
-    getSeasonOptions()
-  }, [])
+    dispatch(getIngredientsList())
+    dispatch(getMeasurementsList())
+    dispatch(getCategoriesList())
+    dispatch(getSeasonsList())
+    dispatch(getCookTimesList())
+  }, [dispatch])
 
   return (
-    <>
-      <Header classes={classes} displayFilter={false} />
-      <Formik
-        initialValues={initialValues}
-        validationSchema={addValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        {seasonList &&
-          timeList &&
-          (props => (
-            <AddRecipeForm
-              {...props}
-              classes={classes}
-              seasonList={seasonList}
-              timeList={timeList}
-            />
-          ))}
-      </Formik>
-    </>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={addValidationSchema}
+      onSubmit={handleSubmit}
+    >
+      {renderProps =>
+        isLoaded ? <AddRecipeForm {...renderProps} /> : <Loading />
+      }
+    </Formik>
   )
 }
 
-export default AddRecipe
+const mapStateToProps = ({
+  ingredients,
+  measurements,
+  categories,
+  cookTimes,
+  seasons
+}) => {
+  return {
+    isLoaded:
+      ingredients.isLoaded &&
+      measurements.isLoaded &&
+      categories.isLoaded &&
+      cookTimes.isLoaded &&
+      seasons.isLoaded
+  }
+}
+
+export default connect(mapStateToProps)(AddRecipe)
+
+AddRecipe.propTypes = {
+  dispatch: PropTypes.func,
+  isLoaded: PropTypes.bool
+}
