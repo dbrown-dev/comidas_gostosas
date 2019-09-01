@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   valueContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -10,16 +10,16 @@ const styles = theme => ({
     alignItems: 'center',
     overflow: 'hidden'
   }
-})
+}))
 
-const ValueContainer = ({ classes, children }) => <div className={classes.valueContainer}>{children}</div>
-
-export default withStyles(styles)(ValueContainer)
+export const ValueContainer = ({ children }) => {
+  const classes = useStyles()
+  return <div className={classes.valueContainer}>{children}</div>
+}
 
 ValueContainer.propTypes = {
   /**
    * The children to be rendered.
    */
-  children: PropTypes.node,
-  classes: PropTypes.object.isRequired
+  children: PropTypes.node
 }

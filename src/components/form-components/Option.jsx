@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { MenuItem } from '@material-ui/core'
 
-const Option = ({ innerRef, isFocused, isSelected, innerProps, children }) => (
+export const Option = ({ innerRef, isFocused, isSelected, innerProps, children }) => (
   <MenuItem
     ref={innerRef}
     selected={isFocused}
@@ -15,8 +15,6 @@ const Option = ({ innerRef, isFocused, isSelected, innerProps, children }) => (
     {children}
   </MenuItem>
 )
-
-export default Option
 
 Option.propTypes = {
   /**

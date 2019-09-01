@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { Chip } from '@material-ui/core'
 import CancelIcon from '@material-ui/icons/Cancel'
-import { withStyles } from '@material-ui/styles'
-import { emphasize } from '@material-ui/core/styles'
+import { makeStyles, emphasize } from '@material-ui/core/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   chip: {
     margin: theme.spacing(0.5, 0.25)
   },
@@ -18,9 +17,10 @@ const styles = theme => ({
       0.08
     )
   }
-})
+}))
 
-const MultiValue = ({ classes, removeProps, isFocused, children }) => {
+export const MultiValue = ({ removeProps, isFocused, children }) => {
+  const classes = useStyles()
   return (
     <Chip
       tabIndex={-1}
@@ -34,8 +34,6 @@ const MultiValue = ({ classes, removeProps, isFocused, children }) => {
   )
 }
 
-export default withStyles(styles)(MultiValue)
-
 MultiValue.propTypes = {
   children: PropTypes.node,
   isFocused: PropTypes.bool.isRequired,
@@ -43,6 +41,5 @@ MultiValue.propTypes = {
     onClick: PropTypes.func.isRequired,
     onMouseDown: PropTypes.func.isRequired,
     onTouchEnd: PropTypes.func.isRequired
-  }).isRequired,
-  classes: PropTypes.object.isRequired
+  }).isRequired
 }

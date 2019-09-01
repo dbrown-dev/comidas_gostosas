@@ -1,25 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   noOptionsMessage: {
     padding: theme.spacing(1, 2)
   }
-})
+}))
 
-const NoOptionsMessage = ({ classes, children, innerProps }) => (
-  <Typography
-    color="textSecondary"
-    className={classes.noOptionsMessage}
-    {...innerProps}
-  >
-    {children}
-  </Typography>
-)
-
-export default withStyles(styles)(NoOptionsMessage)
+export const NoOptionsMessage = ({ children, innerProps }) => {
+  const classes = useStyles()
+  return (
+    <Typography
+      color="textSecondary"
+      className={classes.noOptionsMessage}
+      {...innerProps}
+    >
+      {children}
+    </Typography>
+  )
+}
 
 NoOptionsMessage.propTypes = {
   /**
@@ -29,6 +30,5 @@ NoOptionsMessage.propTypes = {
   /**
    * Props to be passed on to the wrapper.
    */
-  innerProps: PropTypes.object.isRequired,
-  classes: PropTypes.string.isRequired
+  innerProps: PropTypes.object.isRequired
 }

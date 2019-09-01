@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Paper } from '@material-ui/core'
-import { withStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
     zIndex: 1,
@@ -11,15 +11,16 @@ const styles = theme => ({
     left: 0,
     right: 0
   }
-})
+}))
 
-const Menu = ({ children, innerProps, classes }) => (
-  <Paper square className={classes.paper} {...innerProps}>
-    {children}
-  </Paper>
-)
-
-export default withStyles(styles)(Menu)
+export const Menu = ({ children, innerProps }) => {
+  const classes = useStyles()
+  return (
+    <Paper square className={classes.paper} {...innerProps}>
+      {children}
+    </Paper>
+  )
+}
 
 Menu.propTypes = {
   /**
@@ -29,6 +30,5 @@ Menu.propTypes = {
   /**
    * Props to be passed to the menu wrapper.
    */
-  innerProps: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  innerProps: PropTypes.object.isRequired
 }

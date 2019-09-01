@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'ramda'
 import { TextField } from '@material-ui/core'
-import { withStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/styles'
 
 const inputComponent = ({ inputRef, ...props }) => (
   <div ref={inputRef} {...props} />
@@ -17,37 +16,37 @@ inputComponent.propTypes = {
   ])
 }
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   input: {
     display: 'flex',
     padding: 0,
     height: 'auto'
   }
-})
+}))
 
-const Control = ({
+export const Control = ({
   children,
   innerProps,
   innerRef,
-  classes,
   selectProps: { TextFieldProps }
-}) => (
-  <TextField
-    fullWidth
-    InputProps={{
-      inputComponent,
-      inputProps: {
-        className: classes.input,
-        ref: innerRef,
-        children,
-        ...innerProps
-      }
-    }}
-    {...TextFieldProps}
-  />
-)
-
-export default withStyles(styles)(Control)
+}) => {
+  const classes = useStyles()
+  return (
+    <TextField
+      fullWidth
+      InputProps={{
+        inputComponent,
+        inputProps: {
+          className: classes.input,
+          ref: innerRef,
+          children,
+          ...innerProps
+        }
+      }}
+      {...TextFieldProps}
+    />
+  )
+}
 
 Control.propTypes = {
   /**

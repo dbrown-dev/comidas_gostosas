@@ -1,28 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   placeholder: {
     position: 'absolute',
     left: 2,
     bottom: 6,
     fontSize: 16
   }
-})
+}))
 
-const Placeholder = ({ classes, innerProps = {}, children }) => (
-  <Typography
-    color="textSecondary"
-    className={classes.placeholder}
-    {...innerProps}
-  >
-    {children}
-  </Typography>
-)
-
-export default withStyles(styles)(Placeholder)
+export const Placeholder = ({ innerProps = {}, children }) => {
+  const classes = useStyles()
+  return (
+    <Typography
+      color="textSecondary"
+      className={classes.placeholder}
+      {...innerProps}
+    >
+      {children}
+    </Typography>
+  )
+}
 
 Placeholder.propTypes = {
   /**
@@ -32,6 +33,5 @@ Placeholder.propTypes = {
   /**
    * props passed to the wrapping element for the group.
    */
-  innerProps: PropTypes.object,
-  classes: PropTypes.object.isRequired
+  innerProps: PropTypes.object
 }
